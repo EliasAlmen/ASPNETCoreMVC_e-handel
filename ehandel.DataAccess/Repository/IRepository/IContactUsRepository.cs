@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ehandel.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,11 +7,8 @@ using System.Threading.Tasks;
 
 namespace ehandel.DataAccess.Repository.IRepository
 {
-    public interface IService
+    public interface IContactUsRepository : IRepository<ContactUs>
     {
-        ICategoryRepository Category { get; }
-        IContactUsRepository ContactUs { get; }
-
-        void Save();
+        void Update(ContactUs obj);
     }
 }

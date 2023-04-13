@@ -1,7 +1,64 @@
-﻿
+﻿@model ContactUs
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<section class="container my-5">
+    <form method="post">
+        <div class="row">
+            <div class="col-12">
+                <div class="border p-3 mt-4 row">
+                    <div class="col-12 p-2">
+                        <h2 class="text-primary">Write Someting</h2>
+                    </div>
+                    <div asp-validation-summary="All"></div>
+                    <div class="mb-3 col-6">
+                        <label asp-for="Name"></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3 col-6">
+                        <label asp-for="Email"></label>
+                        <input asp-for="Email" rows="3" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3 col-6">
+                        <label asp-for="Phone"></label>
+                        <input asp-for="Phone" class="form-control" />
+                        <span asp-validation-for="Phone" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3 col-6">
+                        <label asp-for="Company"></label>
+                        <input asp-for="Company" class="form-control" />
+                        <span asp-validation-for="Company" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Comment"></label>
+                        <textarea asp-for="Comment" class="form-control"> </textarea>
+                        <span asp-validation-for="Comment" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3 col-1">
+                        <input type="checkbox" class="form-check-input form-control" />
+                    </div>
+                    <span class="col-11">
+                        Save my name, email, and website in this browser for the next time I
+                        comment.
+                    </span>
+                    <div class="col-12">
+                        <button type="submit" onclick="return ValidateInput()" class="btn btn-primary"
+                                style="width:150px">
+                            Submit
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</section>
 
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

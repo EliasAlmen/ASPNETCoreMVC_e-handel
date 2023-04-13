@@ -16,8 +16,10 @@ namespace ehandel.DataAccess.Repository
         {
             _db = db;
             Category = new CategoryRepository(_db);
+            ContactUs = new ContactUsRepository(_db);
         }
         public ICategoryRepository Category { get; private set; }
+        public IContactUsRepository ContactUs { get; private set; }
 
         public void Save()
         {

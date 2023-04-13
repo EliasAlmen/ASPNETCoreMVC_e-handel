@@ -1,20 +1,20 @@
 ﻿<header>
     <div class="container">
-        <img src="img/logo.svg" alt="Logo" class="logo">
+        <a asp-controller="Home" asp-action="Index"><img src="~/img/logo.svg" alt="Logo" class="logo"></a>
         <div id="menu" class="hide">
             <nav class="menu-links">
                 <a class="link" asp-controller="Home" asp-action="Index">HOME</a>
                 <a class="link" asp-controller="Products" asp-action="Index">PRODUCTS</a>
-                <a class="link" asp-controller="Contacts" asp-action="Index">CONTACT</a>
+                <a class="link" asp-controller="Contact" asp-action="Index">CONTACT</a>
                 <div class="dropdown d-inline">
                     <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
                         CMS
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Products list</a></li>
-                        <li><a class="dropdown-item" asp-controller="Category" asp-action="Index">Add Category</a></li>
-                        <li><a class="dropdown-item" href="#">Add Product</a></li>
+                        <li><a class="dropdown-item" asp-controller="Contact" asp-action="CommentList">Comments</a></li>
+                        <li><a class="dropdown-item" asp-controller="Category" asp-action="Index">Category</a></li>
+                        <li><a class="dropdown-item" href="#">Product</a></li>
                     </ul>
                 </div>
             </nav>

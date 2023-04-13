@@ -16,5 +16,6 @@ namespace ehandel.DataAccess.Data
         }
 
         public DbSet<Category> Categories { get; set; }
+        public DbSet<ContactUs> ContactUs { get; set; }
     }
 }
