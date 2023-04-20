@@ -3,13 +3,17 @@
     display: flex;
     justify-content: center;
     align-items: center;
-height: 98px;
+    height: 98px;
+
     .container-fluid {
         .content {
-            .text {
+            display: flex;
+            justify-content: center;
+
+            .text-custom {
                 font-family: $font-poppins;
                 font-size: 16px;
-                color: $color-light-greyishtwo;
+                color: $color-light-grey;
             }
         }
     }

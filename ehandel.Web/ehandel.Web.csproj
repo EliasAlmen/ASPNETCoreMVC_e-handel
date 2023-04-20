@@ -32,4 +32,8 @@
     <ProjectReference Include="..\ehandel.Models\ehandel.Models.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\img\products\" />
+  </ItemGroup>
+
 </Project>

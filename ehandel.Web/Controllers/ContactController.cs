@@ -7,9 +7,9 @@ namespace ehandel.Web.Controllers
 {
     public class ContactController : Controller
     {
-        private readonly IService _service;
+        private readonly IUnitOfWork _service;
 
-        public ContactController(IService service)
+        public ContactController(IUnitOfWork service)
         {
             _service = service;
         }

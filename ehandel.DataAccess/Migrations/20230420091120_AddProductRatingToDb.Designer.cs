@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ehandel.DataAccess.Data;
 
@@ -11,9 +12,11 @@ using ehandel.DataAccess.Data;
 namespace ehandel.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230420091120_AddProductRatingToDb")]
+    partial class AddProductRatingToDb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -85,9 +88,8 @@ namespace ehandel.DataAccess.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
-                    b.Property<string>("CreatedDateTime")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("CreatedDateTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -128,9 +130,20 @@ namespace ehandel.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Rating")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Five")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Four")
+                        .HasColumnType("int");
+
+                    b.Property<int>("One")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Three")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Two")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

@@ -7,9 +7,9 @@ namespace ehandel.Web.Controllers
 {
     public class CategoryController : Controller
     {
-        private readonly IService _service;
+        private readonly IUnitOfWork _service;
 
-        public CategoryController(IService service)
+        public CategoryController(IUnitOfWork service)
         {
             _service = service;
         }

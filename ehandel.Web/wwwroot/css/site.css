@@ -635,7 +635,7 @@ header .toggle .btn-white {
 }
 
 .newsletter {
-  background-color: #404040;
+  background-color: #AEAEAE;
 }
 .newsletter .container-fluid {
   display: flex;
@@ -661,10 +661,14 @@ header .toggle .btn-white {
   align-items: center;
   height: 98px;
 }
-.footer .container-fluid .content .text {
+.footer .container-fluid .content {
+  display: flex;
+  justify-content: center;
+}
+.footer .container-fluid .content .text-custom {
   font-family: "Poppins", sans-serif;
   font-size: 16px;
-  color: #A5A5A5;
+  color: #AEAEAE;
 }
 
 .hero-banner .container-fluid {
