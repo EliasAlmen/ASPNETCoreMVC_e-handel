@@ -24,5 +24,6 @@ namespace ehandel.Models
         [Display(Name = "Comment")]
         [StringLength(500, MinimumLength = 3, ErrorMessage = "Please keep within comment character limits.")]
         public string Comment { get; set; }
+        public DateTime TimeOfContact { get; set; } = DateTime.Now;
     }
 }

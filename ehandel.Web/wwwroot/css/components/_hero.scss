@@ -1,0 +1,70 @@
+.hero {
+    .container-fluid {
+        background-color: $color-theme-white-2;
+        height: 250px;
+        display: flex;
+        align-items: center;
+
+        @include lg {
+            height: 650px;
+        }
+
+        .container {
+            display: block;
+            .content {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                .text {
+                    
+                    .title-welcome {
+                        font-weight: $font-weight-light;
+                        font-family: $font-poppins;
+                        font-size: 12px;
+                        color: $color-dark-grey;
+                        letter-spacing: 2px;
+                        margin-bottom: 10px;
+                    }
+
+                    .img-text {
+                        font-size: 24px;
+                        font-family: $font-poppins;
+                        font-weight: $font-weight-bold;
+                        color: $color-dark-grey;
+                        line-height: 1.125;
+                    }
+
+                    button {
+                        margin-top: 25px;
+                    }
+                }
+
+                .img {
+                    img {
+                        width: 133px;
+                    }
+                }
+
+                @include lg {
+                    .text {
+                        .title-welcome {
+                            font-size: 18px;
+                        }
+
+                        .img-text {
+                            font-size: 60px;
+                        }
+                    }
+
+                    .img {
+                        img {
+                            width: 517px;
+                            margin-bottom: 27px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

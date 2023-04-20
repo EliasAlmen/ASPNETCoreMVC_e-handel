@@ -1,0 +1,22 @@
+.newsletter {
+    background-color: $color-greyishtwo;
+
+    .container-fluid {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .content {
+            margin: 5% 0;
+
+            .whitebox {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 212px;
+                width: 1170px;
+                background-color: $color-white;
+            }
+        }
+    }
+}

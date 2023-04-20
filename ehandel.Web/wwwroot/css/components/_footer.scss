@@ -1,0 +1,16 @@
+.footer {
+    background-color: $color-greyishtwo;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+height: 98px;
+    .container-fluid {
+        .content {
+            .text {
+                font-family: $font-poppins;
+                font-size: 16px;
+                color: $color-light-greyishtwo;
+            }
+        }
+    }
+}

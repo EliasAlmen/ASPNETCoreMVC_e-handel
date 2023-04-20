@@ -1,0 +1,186 @@
+.productdetails {
+    margin-top: 3%;
+
+    .container {
+        display: block;
+        .content-textimg {
+            margin-bottom: 3%;
+            display: flex;
+            justify-content: space-between;
+
+            .images {
+                width: 430px;
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                grid-template-rows: repeat(1, 1fr);
+                grid-column-gap: 6px;
+                grid-row-gap: 6px;
+
+                .div1 {
+                    grid-area: 1 / 1 / 2 / 5;
+                }
+
+                .div2 {
+                    grid-area: 2 / 1 / 3 / 2;
+                }
+
+                .div3 {
+                    grid-area: 2 / 2 / 3 / 3;
+                }
+
+                .div4 {
+                    grid-area: 2 / 3 / 3 / 4;
+                }
+
+                .div5 {
+                    grid-area: 2 / 4 / 3 / 5;
+                }
+            }
+
+            .textinfo {
+                width: 573px;
+
+                .productname {
+                    font-size: 24px;
+                    font-weight: $font-weight-medium;
+                    font-family: $font-poppins;
+                    color: $color-dark-grey;
+                }
+
+                .productdescription {
+                    font-size: 16px;
+                    font-family: $font-roboto;
+                    color: $color-grey;
+                    margin: 5% 0;
+                }
+
+                .border-mod {
+                    border-top: $color-light-grey solid 1px;
+                }
+
+                .productrating {
+                    margin: 5% 0;
+                }
+
+                .productprice {
+                    margin: 5% 0;
+                }
+
+                .addtocart {
+                    margin: 5% 0;
+                }
+
+                .inventory {
+                    margin: 5% 0;
+                }
+
+                .wishlist {
+                    margin: 5% 0;
+
+                    button {
+                        width: 194px;
+                    }
+                }
+            }
+        }
+
+        .content-tabs {
+            margin-bottom: 3%;
+
+            .tab-buttons {
+                margin-bottom: 3%;
+
+                button {
+                    width: 291px;
+                }
+            }
+
+            .tab-info {
+                .tab-title {
+                    font-family: $font-poppins;
+                    font-size: 24px;
+                    color: $color-greyish;
+                }
+
+                .tab-body {
+                    display: flex;
+                    justify-content: space-between;
+
+                    .text {
+                        font-family: $font-roboto;
+                        color: $color-grey;
+                        margin-right: 20px;
+                    }
+                }
+            }
+        }
+
+        .content-related {
+            border-top: 1px solid $color-light-grey;
+
+            .related-title {
+                margin-top: 3%;
+                font-family: $font-poppins;
+                font-size: 24px;
+                font-weight: $font-weight-semibold;
+                color: $color-dark-grey;
+                margin-bottom: 3%;
+            }
+
+            .cards-container {
+                display: flex;
+                justify-content: space-between;
+
+                .card-modified {
+                    box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
+
+                    .content {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: flex-end;
+                        padding-bottom: 15px;
+                        padding-right: 15px;
+
+                        .text-content {
+                            .name {
+                                font-size: 18px;
+                                font-family: $font-poppins;
+                                font-weight: $font-weight-medium;
+                                color: $color-dark-grey;
+                                margin-top: 20px;
+                            }
+
+                            .price {
+                                margin-top: 10px;
+                                font-size: 16px;
+                                font-family: $font-poppins;
+                                color: $color-grey;
+                            }
+                        }
+
+                        .icon {
+                            font-size: 25px;
+                            color: $color-dark-grey;
+                            margin-bottom: 5px;
+                        }
+                    }
+                }
+            }
+        }
+
+        .content-dontknow {
+            margin-top: 3%;
+
+            .dontknow {
+                background-color: $color-theme-white-3;
+                padding: 3% 0;
+
+                .img-container {
+
+                    display: flex;
+                    justify-content: space-evenly;
+                }
+            }
+        }
+    }
+}

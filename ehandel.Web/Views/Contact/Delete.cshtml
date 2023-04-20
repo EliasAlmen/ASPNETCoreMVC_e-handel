@@ -1,0 +1,44 @@
+﻿@model ContactUs
+
+<div class="container">
+    <form method="post" asp-action="Delete">
+        <input asp-for="Id" hidden />
+        <div class="border p-3 mt-4">
+            <div class="row p-2">
+                <h2 class="text-primary">Delete Comment</h2>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Name"></label>
+                <input disabled asp-for="Name" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label asp-for="Email"></label>
+                <input disabled asp-for="Email" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label asp-for="Phone"></label>
+                <input disabled asp-for="Phone" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label asp-for="Company"></label>
+                <input disabled asp-for="Company" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label asp-for="Comment"></label>
+                <input disabled asp-for="Comment" class="form-control" />
+            </div>
+            <button type="submit" class="btn btn-danger" style="width:150px">Delete</button>
+            <a asp-controller="Contact" asp-action="CommentList" class="btn btn-secondary" style="width:150px">
+                Back to list
+            </a>
+        </div>
+    </form>
+</div>
+
+
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

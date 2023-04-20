@@ -1,0 +1,149 @@
+.halfprice {
+    padding-top: 80px;
+    padding-bottom: 80px;
+    background-color: $color-theme-white-1;
+    display: flex;
+
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            grid-template-rows: 1fr;
+            grid-column-gap: 30px;
+            grid-row-gap: 30px;
+
+            @include sm {
+                display: grid;
+                grid-template-columns: repeat(1, 1fr);
+                grid-template-rows: 1fr;
+                grid-column-gap: 30px;
+                grid-row-gap: 30px;
+
+            }
+
+            @include lg {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: 1fr;
+                grid-column-gap: 30px;
+                grid-row-gap: 30px;
+            }
+
+            @include xl {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                grid-template-rows: 1fr;
+                grid-column-gap: 30px;
+                grid-row-gap: 30px;
+            }
+
+            .card-modified {
+                box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
+                background-color: $color-white;
+                width: 369px;
+                height: 430px;
+
+
+                .content {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    padding: 15px;
+                    height: 120px;
+
+                    .text-content {
+                        .name {
+                            font-size: 18px;
+                            font-family: $font-poppins;
+                            font-weight: $font-weight-medium;
+                            color: $color-dark-grey;
+                            margin-top: 5px;
+                        }
+                    }
+
+                    .price-content {
+                        display: flex;
+                        justify-content: space-between;
+
+                        .prices {
+                            .price {
+                                margin-top: 10px;
+                                font-size: 16px;
+                                font-family: $font-poppins;
+                                color: $color-grey;
+                            }
+
+                            .priceoff {
+                                text-decoration: line-through;
+                                margin-top: 10px;
+                                font-size: 16px;
+                                font-family: $font-poppins;
+                                color: $color-grey;
+                                margin-right: 20px;
+                            }
+                        }
+
+
+                        .icon {
+                            font-size: 18px;
+                            color: $color-light-grey;
+                            margin-bottom: 5px;
+                        }
+                    }
+
+                }
+
+            }
+
+            .sales {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                font-family: $font-poppins;
+                text-align: center;
+                padding: 30px;
+
+                .sales-content {
+                    height: 300px;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+
+                    .red-text {
+                        font-size: 18px;
+                        font-weight: $font-weight-bold;
+                    }
+
+                    .fifty {
+                        font-size: 48px;
+                        font-family: $font-playfair;
+                        color: $color-greyish;
+                    }
+
+                    .bestprice {
+                        font-size: 24px;
+                        font-weight: $font-weight-bold;
+                        color: $color-greyish;
+                    }
+
+                    .body {
+                        font-size: 18px;
+                        font-family: $font-roboto;
+                        color: $color-grey;
+                    }
+
+                    .discover {
+                        margin-top: 20px;
+                        font-size: 16px;
+                        color: $color-greyish;
+                    }
+                }
+
+            }
+        }
+    }
+}

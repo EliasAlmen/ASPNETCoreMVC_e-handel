@@ -1,0 +1,93 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .content-form-account {
+        margin: 10% 0;
+        width: 1138px;
+        background-color: $color-white;
+        padding: 3%;
+        box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
+
+        .formclass {
+            input{
+                width: 100%;
+                border: none;
+                background-color: $color-theme-white-3;
+                height: 50px;
+            }
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+            gap: 30px 30px;
+            grid-auto-flow: row;
+            grid-template-areas:
+                "firstnameArea lastnameArea"
+                "streetnameArea streetnameArea"
+                "postalcodeArea cityArea"
+                "mobileArea companyArea"
+                "emailArea emailArea"
+                "passwordArea passwordArea"
+                "confirmpasswordArea confirmpasswordArea"
+                "uploadprofileimgArea uploadprofileimgArea"
+                "acceptArea acceptArea"
+                "submitArea submitArea";
+        }
+
+        .firstnameArea {
+            grid-area: firstnameArea;
+        }
+
+        .lastnameArea {
+            grid-area: lastnameArea;
+        }
+
+        .streetnameArea {
+            grid-area: streetnameArea;
+        }
+
+        .postalcodeArea {
+            grid-area: postalcodeArea;
+        }
+
+        .cityArea {
+            grid-area: cityArea;
+        }
+
+        .mobileArea {
+            grid-area: mobileArea;
+        }
+
+        .companyArea {
+            grid-area: companyArea;
+        }
+
+        .emailArea {
+            grid-area: emailArea;
+        }
+
+        .passwordArea {
+            grid-area: passwordArea;
+        }
+
+        .confirmpasswordArea {
+            grid-area: confirmpasswordArea;
+        }
+
+        .uploadprofileimgArea {
+            grid-area: uploadprofileimgArea;
+        }
+
+        .acceptArea {
+            grid-area: acceptArea;
+            input{
+                height: 20px;
+            }
+        }
+
+        .submitArea {
+            grid-area: submitArea;
+        }
+
+    }
+}

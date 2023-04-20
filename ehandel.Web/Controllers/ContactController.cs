@@ -48,5 +48,39 @@ namespace ehandel.Web.Controllers
             return View(objContactUsList);
         }
 
+        //GET
+        public IActionResult Delete(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            //var contactUsFromDb = _db.Categories.Find(id);
+            var contactUsFromDb = _service.ContactUs.GetFirstOrDefault(u => u.Id == id);
+
+            if (contactUsFromDb == null)
+            {
+                return NotFound();
+            }
+
+            return View(contactUsFromDb);
+        }
+
+        //POST
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeletePOST(int? id)
+        {
+            var obj = _service.ContactUs.GetFirstOrDefault(u => u.Id == id);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+            _service.ContactUs.Remove(obj);
+            _service.Save();
+            TempData["success"] = "Deleted successfully";
+            return RedirectToAction("CommentList");
+        }
+
     }
 }
