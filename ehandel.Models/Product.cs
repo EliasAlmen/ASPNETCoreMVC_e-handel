@@ -47,7 +47,8 @@ namespace ehandel.Models
         [Required]
 		[Display(Name = "Category")]
 		public int CategoryId { get; set; }
-		[ValidateNever]
+        [ForeignKey("CategoryId")]
+        [ValidateNever]
 		public Category Category { get; set; }
 	}
 }

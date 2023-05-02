@@ -21,9 +21,10 @@ function loadDataTable() {
                 },
                 "width": "10px"
             },
-            { "data": "sku",          "width": "30%" },
+            { "data": "sku",          "width": "25%" },
             { "data": "name",           "width": "10%" },
             { "data": "description",           "width": "20%" },
+            { "data": "productStatus.status", "width": "5%" },
             { "data": "productRating.rating", "width": "5%" },
             { "data": "price",          "width": "5%" },
             { "data": "category.name",  "width": "5%" },

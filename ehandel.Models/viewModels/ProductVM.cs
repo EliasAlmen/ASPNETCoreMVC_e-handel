@@ -17,7 +17,7 @@ namespace Bulkybook.Models.ViewModels
         [ValidateNever]
         public IEnumerable<SelectListItem> RatingsList { get; set; }
         [ValidateNever]
-        public IEnumerable<MultiSelectList> StatusList { get; set; }
+        public IEnumerable<SelectListItem> StatusList { get; set; }
 
 
 

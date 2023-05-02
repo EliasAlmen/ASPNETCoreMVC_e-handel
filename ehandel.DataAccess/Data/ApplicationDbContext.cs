@@ -70,20 +70,23 @@ namespace ehandel.DataAccess.Data
                     Rating = "5"
                 }
                 );
-            modelBuilder.Entity<Product>().HasData(
-                new Product
-                {
-                    Id = 1,
-                    SKU = "04acc686-02ca-4e4a-adc1-cb6bb3f297c4",
-                    Name = "Placeholder product",
-                    Description = "Placeholder description",
-                    Price = 99.99,
-                    ImageUrl = "Empty",
-                    CreatedDateTime = "YYYY-MM-DD",
-                    ProductRating = new ProductRating { Rating = "5" },
-                    ProductStatus = new ProductStatus { Status = "New"},
-                    Category = new Category { Name = "Beauty" }
-                });
+            //modelBuilder.Entity<Product>().HasData(
+            //    new Product
+            //    {
+            //        Id = 1,
+            //        SKU = "04acc686-02ca-4e4a-adc1-cb6bb3f297c4",
+            //        Name = "Placeholder product",
+            //        Description = "Placeholder description",
+            //        Price = 99.99,
+            //        ImageUrl = "Empty",
+            //        CreatedDateTime = "YYYY-MM-DD",
+            //        CategoryId = 1,
+            //        ProductRatingId = 1,
+            //        ProductStatusId = 1
+            //        //ProductRating = new ProductRating { Rating = "5" },
+            //        //ProductStatus = new ProductStatus { Status = "New"},
+            //        //Category = new Category { Name = "Beauty" }
+            //    });
 
         }
     }

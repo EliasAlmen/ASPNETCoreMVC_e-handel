@@ -42,6 +42,13 @@
                         </select>
                         <span asp-validation-for="Product.ProductRatingId" class="text-danger"></span>
                     </div>
+                    <div class="mb-3 col-6">
+                        <label asp-for="Product.ProductStatusId"></label>
+                        <select asp-for="Product.ProductStatusId" asp-items="@Model.StatusList" class="form-select" multiple>
+                            <option disabled>--Select Status--</option>
+                        </select>
+                        <span asp-validation-for="Product.ProductStatusId" class="text-danger"></span>
+                    </div>
                     <div class="col-12">
                         @if (Model.Product.Id != 0)
                         {

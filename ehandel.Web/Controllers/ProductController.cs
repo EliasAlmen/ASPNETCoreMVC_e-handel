@@ -36,7 +36,13 @@ namespace ehandel.Web.Controllers
 				{
 					Text = i.Rating,
 					Value = i.Id.ToString()
-				})
+				}),
+
+                StatusList = _service.ProductStatus.GetAll().Select(i => new SelectListItem
+                {
+                    Text = i.Status,
+                    Value = i.Id.ToString()
+                })
             };
 
 			if (id == null || id == 0)
@@ -104,7 +110,7 @@ namespace ehandel.Web.Controllers
 		[HttpGet]
 		public IActionResult GetAll()
 		{
-			var productList = _service.Product.GetAll(includeProperties: "Category,ProductRating");
+			var productList = _service.Product.GetAll(includeProperties: "Category,ProductRating,ProductStatus");
 			return Json(new { data = productList });
 		}
 

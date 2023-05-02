@@ -23,6 +23,7 @@ namespace Bulkybook.DataAccess.Repository
                 objFromDb.Price = obj.Price;
                 objFromDb.Description = obj.Description;
                 objFromDb.ProductRatingId = obj.ProductRatingId;
+                objFromDb.ProductStatusId = obj.ProductStatusId;
                 objFromDb.CategoryId = obj.CategoryId;
                 if (obj.ImageUrl != null)
                 {
