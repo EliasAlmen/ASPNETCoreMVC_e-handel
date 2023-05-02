@@ -22,23 +22,23 @@ namespace ehandel.Web.Controllers
 		}
 
 		//GET
-		public IActionResult Upsert(int? id)
+		public async Task<IActionResult> Upsert(int? id)
 		{
 			ProductVM productVM = new()
 			{
 				Product = new(),
-				CategoryList = _service.Category.GetAll().Select(i => new SelectListItem
+				CategoryList = (await _service.Category.GetAll()).Select(i => new SelectListItem
 				{
 					Text = i.Name,
 					Value = i.Id.ToString()
 				}),
-				RatingsList = _service.ProductRating.GetAll().Select(i => new SelectListItem
+				RatingsList = (await _service.ProductRating.GetAll()).Select(i => new SelectListItem
 				{
 					Text = i.Rating,
 					Value = i.Id.ToString()
 				}),
 
-                StatusList = _service.ProductStatus.GetAll().Select(i => new SelectListItem
+                StatusList = (await _service.ProductStatus.GetAll()).Select(i => new SelectListItem
                 {
                     Text = i.Status,
                     Value = i.Id.ToString()
@@ -54,7 +54,7 @@ namespace ehandel.Web.Controllers
 			}
 			else
 			{
-				productVM.Product = _service.Product.GetFirstOrDefault(u => u.Id == id);
+				productVM.Product = await _service.Product.GetFirstOrDefault(u => u.Id == id);
 				// Update product
 				return View(productVM);
 			}
@@ -65,7 +65,7 @@ namespace ehandel.Web.Controllers
 		//POST
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public IActionResult Upsert(ProductVM obj, IFormFile? file)
+		public async Task<IActionResult> Upsert(ProductVM obj, IFormFile? file)
 		{
 			if (ModelState.IsValid)
 			{
@@ -93,13 +93,13 @@ namespace ehandel.Web.Controllers
 				}
 				if (obj.Product.Id == 0)
 				{
-					_service.Product.Add(obj.Product);
+					await _service.Product.Add(obj.Product);
 				}
 				else
 				{
 					_service.Product.Update(obj.Product);
 				}
-				_service.Save();
+				await _service.Save();
 				TempData["success"] = "Product created successfully";
 				return RedirectToAction("Index");
 			}
@@ -108,17 +108,17 @@ namespace ehandel.Web.Controllers
 
 		#region API CALLS
 		[HttpGet]
-		public IActionResult GetAll()
+		public async Task<IActionResult> GetAll()
 		{
-			var productList = _service.Product.GetAll(includeProperties: "Category,ProductRating,ProductStatus");
+			var productList = await _service.Product.GetAll(includeProperties: "Category,ProductRating,ProductStatus");
 			return Json(new { data = productList });
 		}
 
 		//POST
 		[HttpDelete]
-		public IActionResult Delete(int? id)
+		public async Task<IActionResult> Delete(int? id)
 		{
-			var obj = _service.Product.GetFirstOrDefault(u => u.Id == id);
+			var obj = await _service.Product.GetFirstOrDefault(u => u.Id == id);
 			if (obj == null)
 			{
 				return Json(new { success = false, message = "Error while deleting" });
@@ -131,7 +131,7 @@ namespace ehandel.Web.Controllers
 			}
 
 			_service.Product.Remove(obj);
-			_service.Save();
+			await _service.Save();
 			return Json(new { success = true, message = "Delete successful" });
 
 		}

@@ -30,9 +30,9 @@ namespace ehandel.DataAccess.Repository
         public IProductRatingRepository ProductRating { get; private set; }
         public IProductStatusRepository ProductStatus { get; private set; }
 
-        public void Save()
+        public async Task Save()
         {
-            _db.SaveChanges();
+            await _db.SaveChangesAsync();
         }
     }
 }

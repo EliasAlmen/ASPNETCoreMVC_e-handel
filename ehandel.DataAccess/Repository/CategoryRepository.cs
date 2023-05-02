@@ -18,9 +18,10 @@ namespace ehandel.DataAccess.Repository
             _db = db;
         }
 
+        // No interactions with DB == no AsyncAwaited
         public void Update(Category obj)
         {
-            _db.Categories.Update(obj);
+           _db.Categories.Update(obj);
         }
     }
 }

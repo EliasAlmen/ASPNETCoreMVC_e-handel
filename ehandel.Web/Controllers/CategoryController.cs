@@ -14,9 +14,9 @@ namespace ehandel.Web.Controllers
             _service = service;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            IEnumerable<Category> objCategoryList = _service.Category.GetAll();
+            IEnumerable<Category> objCategoryList = await _service.Category.GetAll();
             return View(objCategoryList);
         }
 
@@ -29,9 +29,9 @@ namespace ehandel.Web.Controllers
         //POST
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Category obj)
+        public async Task<IActionResult> Create(Category obj)
         {
-            IEnumerable<Category> objCategoryList = _service.Category.GetAll();
+            IEnumerable<Category> objCategoryList = await _service.Category.GetAll();
 
             if (objCategoryList.Any(u => u.Name == obj.Name))
             {
@@ -40,8 +40,8 @@ namespace ehandel.Web.Controllers
 
             if (ModelState.IsValid)
             {
-                _service.Category.Add(obj);
-                _service.Save();
+                await _service.Category.Add(obj);
+                await _service.Save();
                 TempData["success"] = "Added successfully";
                 return RedirectToAction("Index");
             }
@@ -49,14 +49,14 @@ namespace ehandel.Web.Controllers
         }
 
         //GET
-        public IActionResult Edit(int? id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || id == 0)
             {
                 return NotFound();
             }
             //var categoryFromDb = _db.Categories.Find(id);
-            var categoryFromDb = _service.Category.GetFirstOrDefault(u => u.Id == id);
+            var categoryFromDb = await _service.Category.GetFirstOrDefault(u => u.Id == id);
 
             if (categoryFromDb == null)
             {
@@ -69,12 +69,12 @@ namespace ehandel.Web.Controllers
         //POST
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(Category obj)
+        public async Task<IActionResult> Edit(Category obj)
         {
             if (ModelState.IsValid)
             {
                 _service.Category.Update(obj);
-                _service.Save();
+                await _service.Save();
                 TempData["success"] = "Updated successfully";
                 return RedirectToAction("Index");
             }
@@ -83,14 +83,14 @@ namespace ehandel.Web.Controllers
 
 
         //GET
-        public IActionResult Delete(int? id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || id == 0)
             {
                 return NotFound();
             }
             //var categoryFromDb = _db.Categories.Find(id);
-            var categoryFromDb = _service.Category.GetFirstOrDefault(u => u.Id == id);
+            var categoryFromDb = await _service.Category.GetFirstOrDefault(u => u.Id == id);
 
             if (categoryFromDb == null)
             {
@@ -103,15 +103,15 @@ namespace ehandel.Web.Controllers
         //POST
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public IActionResult DeletePOST(int? id)
+        public async Task<IActionResult> DeletePOST(int? id)
         {
-            var obj = _service.Category.GetFirstOrDefault(u => u.Id == id);
+            var obj = await _service.Category.GetFirstOrDefault(u => u.Id == id);
             if (obj == null)
             {
                 return NotFound();
             }
             _service.Category.Remove(obj);
-            _service.Save();
+            await _service.Save();
             TempData["success"] = "Deleted successfully";
             return RedirectToAction("Index");
         }

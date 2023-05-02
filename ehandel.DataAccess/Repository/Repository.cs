@@ -17,16 +17,15 @@ namespace ehandel.DataAccess.Repository
         public Repository(ApplicationDbContext db)
         {
             _db = db;
-            //_db.Products.Include(u => u.Category).Include(u => u.CoverType);
             this.dbSet = _db.Set<T>();
         }
-        public void Add(T entity)
+        public async Task Add(T entity)
         {
-            dbSet.Add(entity);
+            await dbSet.AddAsync(entity);
         }
 
-        // IncludeProp - "Category,CoverType"
-        public IEnumerable<T> GetAll(string? includeProperties = null)
+        // IncludeProp
+        public async Task<IEnumerable<T>> GetAll(string? includeProperties = null)
         {
             IQueryable<T> query = dbSet;
             if (includeProperties != null)
@@ -36,10 +35,10 @@ namespace ehandel.DataAccess.Repository
                     query = query.Include(includeProp);
                 }
             }
-            return query.ToList();
+            return await query.ToListAsync();
         }
 
-        public T GetFirstOrDefault(Expression<Func<T, bool>> filter, string? includeProperties = null)
+        public async Task<T> GetFirstOrDefault(Expression<Func<T, bool>> filter, string? includeProperties = null)
         {
             IQueryable<T> query = dbSet;
 
@@ -51,7 +50,7 @@ namespace ehandel.DataAccess.Repository
                     query = query.Include(includeProp);
                 }
             }
-            return query.FirstOrDefault();
+            return await query.FirstOrDefaultAsync();
         }
 
         public void Remove(T entity)

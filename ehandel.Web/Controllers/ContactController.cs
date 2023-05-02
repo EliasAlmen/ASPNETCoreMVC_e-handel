@@ -23,7 +23,7 @@ namespace ehandel.Web.Controllers
         //POST
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Index(ContactUs obj)
+        public async Task<IActionResult> Index(ContactUs obj)
         {
             //IEnumerable<ContactUs> objContactUsList = _service.ContactUs.GetAll();
 
@@ -34,29 +34,29 @@ namespace ehandel.Web.Controllers
 
             if (ModelState.IsValid)
             {
-                _service.ContactUs.Add(obj);
-                _service.Save();
+                await _service.ContactUs.Add(obj);
+                await _service.Save();
                 TempData["success"] = "Comment sent successfully";
                 return RedirectToAction("Index");
             }
             return View(obj);
         }
 
-        public IActionResult CommentList()
+        public async Task<IActionResult> CommentList()
         {
-            IEnumerable<ContactUs> objContactUsList = _service.ContactUs.GetAll();
+            IEnumerable<ContactUs> objContactUsList = await _service.ContactUs.GetAll();
             return View(objContactUsList);
         }
 
         //GET
-        public IActionResult Delete(int? id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || id == 0)
             {
                 return NotFound();
             }
             //var contactUsFromDb = _db.Categories.Find(id);
-            var contactUsFromDb = _service.ContactUs.GetFirstOrDefault(u => u.Id == id);
+            var contactUsFromDb = await _service.ContactUs.GetFirstOrDefault(u => u.Id == id);
 
             if (contactUsFromDb == null)
             {
@@ -69,15 +69,15 @@ namespace ehandel.Web.Controllers
         //POST
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public IActionResult DeletePOST(int? id)
+        public async Task<IActionResult> DeletePOST(int? id)
         {
-            var obj = _service.ContactUs.GetFirstOrDefault(u => u.Id == id);
+            var obj = await _service.ContactUs.GetFirstOrDefault(u => u.Id == id);
             if (obj == null)
             {
                 return NotFound();
             }
             _service.ContactUs.Remove(obj);
-            _service.Save();
+            await _service.Save();
             TempData["success"] = "Deleted successfully";
             return RedirectToAction("CommentList");
         }
