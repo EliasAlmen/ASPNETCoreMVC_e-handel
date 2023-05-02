@@ -27,6 +27,7 @@ namespace ehandel.Models
 		[ValidateNever]
 		public string CreatedDateTime { get; set; } = DateTime.Now.ToString("g");
 
+
 		[Required]
 		[Display(Name = "Rating")]
 		public int ProductRatingId { get; set; }
@@ -35,7 +36,15 @@ namespace ehandel.Models
         public ProductRating ProductRating { get; set; }
 
 
-		[Required]
+        [Required]
+        [Display(Name = "Status")]
+        public int ProductStatusId { get; set; }
+        [ForeignKey("ProductStatusId")]
+        [ValidateNever]
+        public ProductStatus ProductStatus { get; set; }
+
+
+        [Required]
 		[Display(Name = "Category")]
 		public int CategoryId { get; set; }
 		[ValidateNever]

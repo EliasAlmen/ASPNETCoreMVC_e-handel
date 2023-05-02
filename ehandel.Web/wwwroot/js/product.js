@@ -19,14 +19,14 @@ function loadDataTable() {
                         <img src="${data}" alt="Product image" width="80" height="80">
                         `
                 },
-                "width": "15%"
+                "width": "10px"
             },
-            { "data": "sku",          "width": "15%" },
-            { "data": "name",           "width": "15%" },
-            { "data": "description",           "width": "15%" },
-            { "data": "productRating.rating", "width": "15%" },
-            { "data": "price",          "width": "15%" },
-            { "data": "category.name",  "width": "15%" },
+            { "data": "sku",          "width": "30%" },
+            { "data": "name",           "width": "10%" },
+            { "data": "description",           "width": "20%" },
+            { "data": "productRating.rating", "width": "5%" },
+            { "data": "price",          "width": "5%" },
+            { "data": "category.name",  "width": "5%" },
             { "data": "createdDateTime", "width": "15%" },
             {
                 "data": "id",
@@ -40,7 +40,7 @@ function loadDataTable() {
                         </div>
                         `
                 },
-                "width": "15%"
+                "width": "5%"
             },
         ]
     });

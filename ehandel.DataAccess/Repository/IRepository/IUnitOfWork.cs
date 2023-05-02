@@ -13,6 +13,7 @@ namespace ehandel.DataAccess.Repository.IRepository
         IContactUsRepository ContactUs { get; }
         IProductRepository Product { get; }
         IProductRatingRepository ProductRating { get; }
+        IProductStatusRepository ProductStatus { get; }
 
         void Save();
     }

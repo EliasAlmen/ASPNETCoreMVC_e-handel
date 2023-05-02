@@ -32,11 +32,11 @@ namespace ehandel.Web.Controllers
 					Text = i.Name,
 					Value = i.Id.ToString()
 				}),
-                RatingsList = _service.ProductRating.GetAll().Select(i => new SelectListItem
-                {
-                    Text = i.Rating,
-                    Value = i.Id.ToString()
-                }),
+				RatingsList = _service.ProductRating.GetAll().Select(i => new SelectListItem
+				{
+					Text = i.Rating,
+					Value = i.Id.ToString()
+				})
             };
 
 			if (id == null || id == 0)
