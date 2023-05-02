@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ehandel.DataAccess.Data;
 
@@ -11,9 +12,11 @@ using ehandel.DataAccess.Data;
 namespace ehandel.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230502183714_AddedSeededItems")]
+    partial class AddedSeededItems
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -124,18 +127,6 @@ namespace ehandel.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ContactUs");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Comment = "This is a test comment.",
-                            Company = "Acme Inc.",
-                            Email = "johndoe@example.com",
-                            Name = "John Doe",
-                            Phone = "123-456-7890",
-                            TimeOfContact = new DateTime(2023, 5, 2, 20, 44, 38, 954, DateTimeKind.Local).AddTicks(9502)
-                        });
                 });
 
             modelBuilder.Entity("ehandel.Models.Product", b =>
@@ -193,9 +184,9 @@ namespace ehandel.DataAccess.Migrations
                         {
                             Id = 1,
                             CategoryId = 1,
-                            CreatedDateTime = "2023-05-02 20:44",
+                            CreatedDateTime = "2023-05-02 20:37",
                             Description = "Placeholder description",
-                            ImageUrl = "\\img\\products\\placeholder.svg",
+                            ImageUrl = "\\img\\products\\placeholder.png",
                             Name = "Placeholder product",
                             Price = 99.99m,
                             ProductRatingId = 1,
