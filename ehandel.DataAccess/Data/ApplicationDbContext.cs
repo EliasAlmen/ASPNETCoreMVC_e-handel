@@ -20,7 +20,9 @@ namespace ehandel.DataAccess.Data
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductRating> ProductRatings { get; set; }
         public DbSet<ProductStatus> ProductStatuses { get; set; }
+        public DbSet<ProductStatusMapping> ProductStatusMappings { get; set; }
 
+        // SEED DATA
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             #region Category SEED
@@ -141,9 +143,27 @@ namespace ehandel.DataAccess.Data
                         ImageUrl = "\\img\\products\\placeholder.svg",
                         CreatedDateTime = DateTime.Now.ToString("g"),
                         CategoryId = 1,
-                        ProductRatingId = 1,
-                        ProductStatusId = 1
+                        ProductRatingId = 1
                     });
+            #endregion
+
+            #region ProductStatusMapping SEED
+            modelBuilder.Entity<ProductStatusMapping>().HasData(
+                        new ProductStatusMapping
+                        {
+                            ProductId = 1,
+                            ProductStatusId = 1,
+                        },
+                        new ProductStatusMapping
+                        {
+                            ProductId = 1,
+                            ProductStatusId = 2,
+                        },
+                        new ProductStatusMapping
+                        {
+                            ProductId = 1,
+                            ProductStatusId = 3,
+                        }); 
             #endregion
 
             #region ContactUs comment SEED

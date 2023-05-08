@@ -18,8 +18,6 @@ namespace Bulkybook.Models.ViewModels
         public IEnumerable<SelectListItem> RatingsList { get; set; }
         [ValidateNever]
         public IEnumerable<SelectListItem> StatusList { get; set; }
-
-
-
+        public List<string> SelectedStatuses { get; set; }
     }
 }

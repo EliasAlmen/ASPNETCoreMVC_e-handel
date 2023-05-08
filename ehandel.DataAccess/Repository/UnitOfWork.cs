@@ -23,12 +23,14 @@ namespace ehandel.DataAccess.Repository
             Product = new ProductRepository(_db);
             ProductRating = new ProductRatingRepository(_db);
             ProductStatus = new ProductStatusRepository(_db);
+            ProductStatusMapping = new ProductStatusMappingRepository(_db);
         }
         public ICategoryRepository Category { get; private set; }
         public IContactUsRepository ContactUs { get; private set; }
         public IProductRepository Product { get; private set; }
         public IProductRatingRepository ProductRating { get; private set; }
         public IProductStatusRepository ProductStatus { get; private set; }
+        public IProductStatusMappingRepository ProductStatusMapping { get; private set; }
 
         public async Task Save()
         {

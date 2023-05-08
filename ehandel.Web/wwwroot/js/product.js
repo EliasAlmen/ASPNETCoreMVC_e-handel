@@ -24,7 +24,17 @@ function loadDataTable() {
             { "data": "sku",          "width": "25%" },
             { "data": "name",           "width": "10%" },
             { "data": "description",           "width": "20%" },
-            { "data": "productStatus.status", "width": "5%" },
+            {
+                "data": "productStatusMappings",
+                "render": function (data) {
+                    let productStatuses = '';
+                    data.forEach(function (item) {
+                        productStatuses += item.productStatus.status + ', ';
+                    });
+                    return productStatuses.slice(0, -2);
+                },
+                "width": "5%"
+            },
             { "data": "productRating.rating", "width": "5%" },
             { "data": "price",          "width": "5%" },
             { "data": "category.name",  "width": "5%" },

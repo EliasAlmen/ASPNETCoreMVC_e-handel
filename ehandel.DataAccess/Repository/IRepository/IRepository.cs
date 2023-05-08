@@ -13,7 +13,8 @@ namespace ehandel.DataAccess.Repository.IRepository
         Task<T> GetFirstOrDefault(Expression<Func<T, bool>> filter, string? includeProperties = null);
         Task<IEnumerable<T>> GetAll(string? includeProperties = null);
         Task Add(T entity);
-        void Remove(T entity);
+		Task<T> GetByIdAsync(int id);
+		void Remove(T entity);
         void RemoveRange(IEnumerable<T> entity);
     }
 }

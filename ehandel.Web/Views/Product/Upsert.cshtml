@@ -1,8 +1,19 @@
 ﻿@model Bulkybook.Models.ViewModels.ProductVM
+
+@{
+    var statusList = new List<ProductStatus>
+    {
+        new ProductStatus { Id = 1, Status = "New" },
+        new ProductStatus { Id = 2, Status = "Popular" },
+        new ProductStatus { Id = 3, Status = "Featured" }
+    };
+}
+
 <div class="container">
     <form method="post" asp-action="Upsert" enctype="multipart/form-data">
         <input asp-for="Product.Id" hidden />
         <input asp-for="Product.ImageUrl" hidden />
+        <input type="hidden" name="selectedStatuses" id="selectedStatuses" value="" />
         <div class="row">
             <div class="col-10">
                 <div class="border p-3 mt-4 row">
@@ -43,11 +54,15 @@
                         <span asp-validation-for="Product.ProductRatingId" class="text-danger"></span>
                     </div>
                     <div class="mb-3 col-6">
-                        <label asp-for="Product.ProductStatusId"></label>
-                        <select asp-for="Product.ProductStatusId" asp-items="@Model.StatusList" class="form-select" multiple>
-                            <option disabled>--Select Status--</option>
-                        </select>
-                        <span asp-validation-for="Product.ProductStatusId" class="text-danger"></span>
+                        <label>Product Statuses</label>
+                        @foreach (var status in statusList)
+                        {
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="selectedStatuses" value="@status.Id" id="status_@status.Id">
+                                <label class="form-check-label" for="status_@status.Id">@status.Status</label>
+                            </div>
+                        }
+                        <input asp-for="Product.ProductStatusMappings" hidden />
                     </div>
                     <div class="col-12">
                         @if (Model.Product.Id != 0)
@@ -63,28 +78,19 @@
                         </a>
                     </div>
                 </div>
-
             </div>
             <div class="col-2 pt-4">
-                <img src="@Model.Product.ImageUrl"
-                     width="100%" style="border-radius:5px; border:1px solid #bbb9b9" />
+                <img src="@Model.Product.ImageUrl" width="100%" style="border-radius:5px; border:1px solid #bbb9b9" />
             </div>
         </div>
     </form>
 </div>
-
 
 @section Scripts{
     @{
         <partial name="_ValidationScriptsPartial" />
     }
     <script>
-        //tinymce.init({
-        //    selector: 'textarea',
-        //    plugins: 'advlist autolink lists link image charmap print preview hr anchor pagebreak',
-        //    toolbar_mode: 'floating',
-
-        //});
         function ValidateInput() {
             if (document.getElementById("uploadBox").value == "") {
                 Swal.fire({
@@ -96,5 +102,14 @@
             }
             return true;
         }
+
+        var selectedStatuses = [];
+
+        $('input[name="selectedStatuses"]:checked').each(function () {
+            selectedStatuses.push($(this).val());
+        });
+
+        $('#selectedStatuses').val(selectedStatuses.join(','));
+
     </script>
 }

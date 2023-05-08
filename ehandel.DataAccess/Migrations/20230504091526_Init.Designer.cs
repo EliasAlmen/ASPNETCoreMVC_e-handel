@@ -12,8 +12,8 @@ using ehandel.DataAccess.Data;
 namespace ehandel.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230502183714_AddedSeededItems")]
-    partial class AddedSeededItems
+    [Migration("20230504091526_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -127,6 +127,18 @@ namespace ehandel.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ContactUs");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Comment = "This is a test comment.",
+                            Company = "Acme Inc.",
+                            Email = "johndoe@example.com",
+                            Name = "John Doe",
+                            Phone = "123-456-7890",
+                            TimeOfContact = new DateTime(2023, 5, 4, 11, 15, 26, 243, DateTimeKind.Local).AddTicks(2401)
+                        });
                 });
 
             modelBuilder.Entity("ehandel.Models.Product", b =>
@@ -162,9 +174,6 @@ namespace ehandel.DataAccess.Migrations
                     b.Property<int>("ProductRatingId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ProductStatusId")
-                        .HasColumnType("int");
-
                     b.Property<string>("SKU")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -175,8 +184,6 @@ namespace ehandel.DataAccess.Migrations
 
                     b.HasIndex("ProductRatingId");
 
-                    b.HasIndex("ProductStatusId");
-
                     b.ToTable("Products");
 
                     b.HasData(
@@ -184,13 +191,12 @@ namespace ehandel.DataAccess.Migrations
                         {
                             Id = 1,
                             CategoryId = 1,
-                            CreatedDateTime = "2023-05-02 20:37",
+                            CreatedDateTime = "2023-05-04 11:15",
                             Description = "Placeholder description",
-                            ImageUrl = "\\img\\products\\placeholder.png",
+                            ImageUrl = "\\img\\products\\placeholder.svg",
                             Name = "Placeholder product",
                             Price = 99.99m,
                             ProductRatingId = 1,
-                            ProductStatusId = 1,
                             SKU = "04acc686-02ca-4e4a-adc1-cb6bb3f297c4"
                         });
                 });
@@ -273,6 +279,38 @@ namespace ehandel.DataAccess.Migrations
                         });
                 });
 
+            modelBuilder.Entity("ehandel.Models.ProductStatusMapping", b =>
+                {
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductStatusId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ProductId", "ProductStatusId");
+
+                    b.HasIndex("ProductStatusId");
+
+                    b.ToTable("ProductStatusMappings");
+
+                    b.HasData(
+                        new
+                        {
+                            ProductId = 1,
+                            ProductStatusId = 1
+                        },
+                        new
+                        {
+                            ProductId = 1,
+                            ProductStatusId = 2
+                        },
+                        new
+                        {
+                            ProductId = 1,
+                            ProductStatusId = 3
+                        });
+                });
+
             modelBuilder.Entity("ehandel.Models.Product", b =>
                 {
                     b.HasOne("ehandel.Models.Category", "Category")
@@ -287,17 +325,38 @@ namespace ehandel.DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Category");
+
+                    b.Navigation("ProductRating");
+                });
+
+            modelBuilder.Entity("ehandel.Models.ProductStatusMapping", b =>
+                {
+                    b.HasOne("ehandel.Models.Product", "Product")
+                        .WithMany("ProductStatusMappings")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("ehandel.Models.ProductStatus", "ProductStatus")
-                        .WithMany()
+                        .WithMany("ProductStatusMappings")
                         .HasForeignKey("ProductStatusId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Category");
-
-                    b.Navigation("ProductRating");
+                    b.Navigation("Product");
 
                     b.Navigation("ProductStatus");
+                });
+
+            modelBuilder.Entity("ehandel.Models.Product", b =>
+                {
+                    b.Navigation("ProductStatusMappings");
+                });
+
+            modelBuilder.Entity("ehandel.Models.ProductStatus", b =>
+                {
+                    b.Navigation("ProductStatusMappings");
                 });
 #pragma warning restore 612, 618
         }

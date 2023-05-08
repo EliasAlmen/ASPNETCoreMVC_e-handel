@@ -1,5 +1,6 @@
 ﻿using ehandel.DataAccess.Data;
 using ehandel.DataAccess.Repository.IRepository;
+using ehandel.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -25,20 +26,35 @@ namespace ehandel.DataAccess.Repository
         }
 
         // IncludeProp
-        public async Task<IEnumerable<T>> GetAll(string? includeProperties = null)
+        //todo: something is wrong.
+        public async Task<IEnumerable<T>> GetAll(string includeProperties = null)
         {
             IQueryable<T> query = dbSet;
-            if (includeProperties != null)
+
+            if (!string.IsNullOrEmpty(includeProperties))
             {
-                foreach (var includeProp in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                string[] includeProps = includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+
+                foreach (var includeProp in includeProps)
                 {
                     query = query.Include(includeProp);
                 }
             }
+
             return await query.ToListAsync();
         }
 
-        public async Task<T> GetFirstOrDefault(Expression<Func<T, bool>> filter, string? includeProperties = null)
+
+
+
+        public async Task<T> GetByIdAsync(int id)
+		{
+			return await dbSet.FindAsync(id);
+		}
+
+
+
+		public async Task<T> GetFirstOrDefault(Expression<Func<T, bool>> filter, string? includeProperties = null)
         {
             IQueryable<T> query = dbSet;
 

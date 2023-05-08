@@ -14,6 +14,7 @@ namespace ehandel.DataAccess.Repository.IRepository
         IProductRepository Product { get; }
         IProductRatingRepository ProductRating { get; }
         IProductStatusRepository ProductStatus { get; }
+        IProductStatusMappingRepository ProductStatusMapping { get; }
 
         Task Save();
     }

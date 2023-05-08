@@ -35,14 +35,7 @@ namespace ehandel.Models
 		[ValidateNever]
         public ProductRating ProductRating { get; set; }
 
-
-        [Required]
-        [Display(Name = "Status")]
-        public int ProductStatusId { get; set; }
-        [ForeignKey("ProductStatusId")]
-        [ValidateNever]
-        public ProductStatus ProductStatus { get; set; }
-
+        public ICollection<ProductStatusMapping> ProductStatusMappings { get; set; }
 
         [Required]
 		[Display(Name = "Category")]

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace ehandel.Models
@@ -10,6 +11,7 @@ namespace ehandel.Models
     {
         public int Id { get; set; }
         public string Status { get; set; }
-        //public ICollection<Product> Products { get; set;} = new List<Product>();
+		[JsonIgnore]
+		public ICollection<ProductStatusMapping> ProductStatusMappings { get; set; }
     }
 }
