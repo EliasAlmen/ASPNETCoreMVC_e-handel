@@ -11,7 +11,8 @@ namespace ehandel.Models
     {
         public int Id { get; set; }
         public string Status { get; set; }
-		[JsonIgnore]
-		public ICollection<ProductStatusMapping> ProductStatusMappings { get; set; }
+        [JsonIgnore]
+        public ICollection<ProductStatusMapping> ProductStatusMappings { get; set; }
+
     }
 }

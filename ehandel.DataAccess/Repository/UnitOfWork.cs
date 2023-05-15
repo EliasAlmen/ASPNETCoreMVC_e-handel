@@ -1,6 +1,4 @@
-﻿using Bulkybook.DataAccess.Repository;
-using Bulkybook.DataAccess.Repository.IRepository;
-using ehandel.DataAccess.Data;
+﻿using ehandel.DataAccess.Data;
 using ehandel.DataAccess.Repository.IRepository;
 using ehandel.Models;
 using System;
@@ -36,5 +34,6 @@ namespace ehandel.DataAccess.Repository
         {
             await _db.SaveChangesAsync();
         }
+
     }
 }

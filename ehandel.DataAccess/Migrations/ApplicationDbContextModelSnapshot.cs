@@ -134,7 +134,7 @@ namespace ehandel.DataAccess.Migrations
                             Email = "johndoe@example.com",
                             Name = "John Doe",
                             Phone = "123-456-7890",
-                            TimeOfContact = new DateTime(2023, 5, 4, 11, 15, 26, 243, DateTimeKind.Local).AddTicks(2401)
+                            TimeOfContact = new DateTime(2023, 5, 12, 10, 29, 5, 748, DateTimeKind.Local).AddTicks(3733)
                         });
                 });
 
@@ -188,7 +188,7 @@ namespace ehandel.DataAccess.Migrations
                         {
                             Id = 1,
                             CategoryId = 1,
-                            CreatedDateTime = "2023-05-04 11:15",
+                            CreatedDateTime = "2023-05-12 10:29",
                             Description = "Placeholder description",
                             ImageUrl = "\\img\\products\\placeholder.svg",
                             Name = "Placeholder product",

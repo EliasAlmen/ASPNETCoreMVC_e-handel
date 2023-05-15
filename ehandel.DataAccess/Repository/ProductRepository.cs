@@ -1,9 +1,12 @@
-﻿using Bulkybook.DataAccess.Repository.IRepository;
+﻿
 using ehandel.DataAccess.Data;
 using ehandel.DataAccess.Repository;
+using ehandel.DataAccess.Repository.IRepository;
 using ehandel.Models;
+using ehandel.Models.ViewModels;
+using Microsoft.EntityFrameworkCore;
 
-namespace Bulkybook.DataAccess.Repository
+namespace ehandel.DataAccess.Repository
 {
 	public class ProductRepository : Repository<Product>, IProductRepository
     {
@@ -14,21 +17,61 @@ namespace Bulkybook.DataAccess.Repository
             _db = db; 
         }
 
-        public void Update(Product obj)
+        public async Task UpdateAsync(ProductVM obj)
         {
-            var objFromDb = _db.Products.FirstOrDefault(u => u.Id == obj.Id);
-            if (objFromDb != null)
+            var objFromDb = await _db.Products
+                .Include(p => p.ProductStatusMappings)
+                .FirstOrDefaultAsync(u => u.Id == obj.Id);
+
+            if (objFromDb == null)
             {
-                objFromDb.Name = obj.Name;
-                objFromDb.Price = obj.Price;
-                objFromDb.Description = obj.Description;
-                objFromDb.ProductRatingId = obj.ProductRatingId;
-                objFromDb.ProductStatusMappings = obj.ProductStatusMappings;
-                objFromDb.CategoryId = obj.CategoryId;
-                if (obj.ImageUrl != null)
+                return;
+            }
+
+            objFromDb.Name = obj.Name;
+            objFromDb.Price = obj.Price;
+            objFromDb.Description = obj.Description;
+            objFromDb.ProductRatingId = obj.ProductRatingId;
+            objFromDb.CategoryId = obj.CategoryId;
+
+            var selectedStatusIds = obj.SelectedStatuses ?? new List<int>();
+
+            // Remove mappings that are no longer selected
+            var mappingsToRemove = objFromDb.ProductStatusMappings
+                .Where(m => !selectedStatusIds.Contains(m.ProductStatusId))
+                .ToList();
+
+            foreach (var mappingToRemove in mappingsToRemove)
+            {
+                objFromDb.ProductStatusMappings.Remove(mappingToRemove);
+            }
+
+            // Add or update mappings
+            foreach (var productStatusId in selectedStatusIds)
+            {
+                var existingMapping = objFromDb.ProductStatusMappings
+                    .FirstOrDefault(m => m.ProductStatusId == productStatusId);
+
+                if (existingMapping != null)
                 {
-                    objFromDb.ImageUrl = obj.ImageUrl;
+                    // Update the existing mapping
+                    existingMapping.ProductStatusId = productStatusId;
                 }
+                else
+                {
+                    // Add a new mapping
+                    var newMapping = new ProductStatusMapping
+                    {
+                        ProductId = objFromDb.Id,
+                        ProductStatusId = productStatusId
+                    };
+                    objFromDb.ProductStatusMappings.Add(newMapping);
+                }
+            }
+
+            if (obj.ImageUrl != null)
+            {
+                objFromDb.ImageUrl = obj.ImageUrl;
             }
         }
     }

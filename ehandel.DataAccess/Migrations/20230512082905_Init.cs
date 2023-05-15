@@ -146,7 +146,7 @@ namespace ehandel.DataAccess.Migrations
             migrationBuilder.InsertData(
                 table: "ContactUs",
                 columns: new[] { "Id", "Comment", "Company", "Email", "Name", "Phone", "TimeOfContact" },
-                values: new object[] { 1, "This is a test comment.", "Acme Inc.", "johndoe@example.com", "John Doe", "123-456-7890", new DateTime(2023, 5, 4, 11, 15, 26, 243, DateTimeKind.Local).AddTicks(2401) });
+                values: new object[] { 1, "This is a test comment.", "Acme Inc.", "johndoe@example.com", "John Doe", "123-456-7890", new DateTime(2023, 5, 12, 10, 29, 5, 748, DateTimeKind.Local).AddTicks(3733) });
 
             migrationBuilder.InsertData(
                 table: "ProductRatings",
@@ -173,7 +173,7 @@ namespace ehandel.DataAccess.Migrations
             migrationBuilder.InsertData(
                 table: "Products",
                 columns: new[] { "Id", "CategoryId", "CreatedDateTime", "Description", "ImageUrl", "Name", "Price", "ProductRatingId", "SKU" },
-                values: new object[] { 1, 1, "2023-05-04 11:15", "Placeholder description", "\\img\\products\\placeholder.svg", "Placeholder product", 99.99m, 1, "04acc686-02ca-4e4a-adc1-cb6bb3f297c4" });
+                values: new object[] { 1, 1, "2023-05-12 10:29", "Placeholder description", "\\img\\products\\placeholder.svg", "Placeholder product", 99.99m, 1, "04acc686-02ca-4e4a-adc1-cb6bb3f297c4" });
 
             migrationBuilder.InsertData(
                 table: "ProductStatusMappings",

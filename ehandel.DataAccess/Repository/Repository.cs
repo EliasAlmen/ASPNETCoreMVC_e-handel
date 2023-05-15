@@ -25,17 +25,18 @@ namespace ehandel.DataAccess.Repository
             await dbSet.AddAsync(entity);
         }
 
-        // IncludeProp
-        //todo: something is wrong.
-        public async Task<IEnumerable<T>> GetAll(string includeProperties = null)
+        public async Task<IEnumerable<T>> GetAll(Expression<Func<T, bool>>? filter = null, string? includeProperties = null)
         {
             IQueryable<T> query = dbSet;
 
-            if (!string.IsNullOrEmpty(includeProperties))
+            if (filter != null)
             {
-                string[] includeProps = includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+                query = query.Where(filter);
+            }
 
-                foreach (var includeProp in includeProps)
+            if (includeProperties != null)
+            {
+                foreach (var includeProp in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
                 {
                     query = query.Include(includeProp);
                 }
@@ -44,17 +45,13 @@ namespace ehandel.DataAccess.Repository
             return await query.ToListAsync();
         }
 
-
-
-
         public async Task<T> GetByIdAsync(int id)
-		{
-			return await dbSet.FindAsync(id);
-		}
+        {
+            return await dbSet.FindAsync(id);
+        }
 
 
-
-		public async Task<T> GetFirstOrDefault(Expression<Func<T, bool>> filter, string? includeProperties = null)
+        public async Task<T> GetFirstOrDefault(Expression<Func<T, bool>> filter, string? includeProperties = null)
         {
             IQueryable<T> query = dbSet;
 
@@ -78,5 +75,11 @@ namespace ehandel.DataAccess.Repository
         {
             dbSet.RemoveRange(entity);
         }
+
+        public async Task AddRange(IEnumerable<T> entity)
+        {
+            await dbSet.AddRangeAsync(entity);
+        }
+
     }
 }

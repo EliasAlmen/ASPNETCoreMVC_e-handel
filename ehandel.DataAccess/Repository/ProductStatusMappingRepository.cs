@@ -21,15 +21,8 @@ namespace ehandel.DataAccess.Repository
 
         public void Update(ProductStatusMapping obj)
         {
-            _db.ProductStatusMappings.Update(obj);
-        }
-
-        public async Task<List<ProductStatusMapping>> GetByProductIdAsync(int productId)
-        {
-            return await _db.ProductStatusMappings
-            .Include(psm => psm.ProductStatus)
-            .Where(psm => psm.ProductId == productId)
-            .ToListAsync();
+            _db.ProductStatusMappings.Attach(obj);
+            _db.Entry(obj).State = EntityState.Modified;
         }
     }
 }

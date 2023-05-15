@@ -25,6 +25,8 @@ namespace ehandel.DataAccess.Data
         // SEED DATA
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             #region Category SEED
             modelBuilder.Entity<Category>().HasData(
                     new Category
@@ -133,37 +135,28 @@ namespace ehandel.DataAccess.Data
 
             #region Product Placeholder SEED
             modelBuilder.Entity<Product>().HasData(
-                    new Product
-                    {
-                        Id = 1,
-                        SKU = "04acc686-02ca-4e4a-adc1-cb6bb3f297c4",
-                        Name = "Placeholder product",
-                        Description = "Placeholder description",
-                        Price = 99.99,
-                        ImageUrl = "\\img\\products\\placeholder.svg",
-                        CreatedDateTime = DateTime.Now.ToString("g"),
-                        CategoryId = 1,
-                        ProductRatingId = 1
-                    });
+                        new Product
+                        {
+                            Id = 1,
+                            SKU = "04acc686-02ca-4e4a-adc1-cb6bb3f297c4",
+                            Name = "Placeholder product",
+                            Description = "Placeholder description",
+                            Price = 99.99,
+                            ImageUrl = "\\img\\products\\placeholder.svg",
+                            CreatedDateTime = DateTime.Now.ToString("g"),
+                            CategoryId = 1,
+                            ProductRatingId = 1
+                        });
+
             #endregion
 
             #region ProductStatusMapping SEED
             modelBuilder.Entity<ProductStatusMapping>().HasData(
-                        new ProductStatusMapping
-                        {
-                            ProductId = 1,
-                            ProductStatusId = 1,
-                        },
-                        new ProductStatusMapping
-                        {
-                            ProductId = 1,
-                            ProductStatusId = 2,
-                        },
-                        new ProductStatusMapping
-                        {
-                            ProductId = 1,
-                            ProductStatusId = 3,
-                        }); 
+                        new ProductStatusMapping { ProductId = 1, ProductStatusId = 1 },
+                        new ProductStatusMapping { ProductId = 1, ProductStatusId = 2 },
+                        new ProductStatusMapping { ProductId = 1, ProductStatusId = 3 }
+                    );
+
             #endregion
 
             #region ContactUs comment SEED
@@ -181,7 +174,7 @@ namespace ehandel.DataAccess.Data
                 ); 
             #endregion
 
-            base.OnModelCreating(modelBuilder);
+            
 
         }
     }

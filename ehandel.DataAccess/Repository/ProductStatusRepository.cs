@@ -22,7 +22,5 @@ namespace ehandel.DataAccess.Repository
         {
             _db.ProductStatuses.Update(obj);
         }
-
-
     }
 }

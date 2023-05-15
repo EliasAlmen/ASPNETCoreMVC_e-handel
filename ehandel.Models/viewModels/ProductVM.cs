@@ -7,17 +7,63 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bulkybook.Models.ViewModels
+namespace ehandel.Models.ViewModels
 {
     public class ProductVM
     {
-        public Product Product { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public double Price { get; set; }
         [ValidateNever]
+        public string? ImageUrl { get; set; }
+        public int ProductRatingId { get; set; }
+        public int CategoryId { get; set; }
+        [ValidateNever] 
         public IEnumerable<SelectListItem> CategoryList { get; set; }
         [ValidateNever]
         public IEnumerable<SelectListItem> RatingsList { get; set; }
         [ValidateNever]
         public IEnumerable<SelectListItem> StatusList { get; set; }
-        public List<string> SelectedStatuses { get; set; }
+        [ValidateNever]
+        public List<int>? SelectedStatuses { get; set; }
+
+        public static implicit operator Product(ProductVM vm)
+        {
+            return new Product
+            {
+                Id = vm.Id,
+                Name = vm.Name,
+                Description = vm.Description,
+                Price = vm.Price,
+                ImageUrl = vm.ImageUrl,
+                ProductRatingId = vm.ProductRatingId,
+                CategoryId = vm.CategoryId,
+                ProductStatusMappings = vm.SelectedStatuses?.Select(statusId => new ProductStatusMapping { ProductStatusId = statusId }).ToList()
+            };
+        }
+
+        public static implicit operator ProductVM(Product v)
+        {
+            return new ProductVM
+            {
+                Id = v.Id,
+                Name = v.Name,
+                Description = v.Description,
+                Price = v.Price,
+                ImageUrl = v.ImageUrl,
+                ProductRatingId = v.ProductRatingId,
+                CategoryId = v.CategoryId,
+                SelectedStatuses = v.ProductStatusMappings?.Select(mapping => mapping.ProductStatusId).ToList()
+            };
+        }
+        //public Product Product { get; set; }
+        //[ValidateNever]
+        //public IEnumerable<SelectListItem> CategoryList { get; set; }
+        //[ValidateNever]
+        //public IEnumerable<SelectListItem> RatingsList { get; set; }
+        //[ValidateNever]
+        //public IEnumerable<SelectListItem> StatusList { get; set; }
+        //public List<int> SelectedStatuses { get; set; }
     }
 }

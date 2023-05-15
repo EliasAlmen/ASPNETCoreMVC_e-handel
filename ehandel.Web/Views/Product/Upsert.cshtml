@@ -1,71 +1,84 @@
-﻿@model Bulkybook.Models.ViewModels.ProductVM
+﻿@model ehandel.Models.ViewModels.ProductVM
 
-@{
-    var statusList = new List<ProductStatus>
-    {
-        new ProductStatus { Id = 1, Status = "New" },
-        new ProductStatus { Id = 2, Status = "Popular" },
-        new ProductStatus { Id = 3, Status = "Featured" }
-    };
-}
 
 <div class="container">
     <form method="post" asp-action="Upsert" enctype="multipart/form-data">
-        <input asp-for="Product.Id" hidden />
-        <input asp-for="Product.ImageUrl" hidden />
-        <input type="hidden" name="selectedStatuses" id="selectedStatuses" value="" />
+        <input asp-for="Id" hidden />
+        <input asp-for="ImageUrl" hidden />
         <div class="row">
             <div class="col-10">
                 <div class="border p-3 mt-4 row">
                     <div class="col-12 p-2">
-                        <h2 class="text-primary">@(Model.Product.Id != 0 ? "Update" : "Create") Product</h2>
+                        <h2 class="text-primary">@(Model.Id != 0 ? "Update" : "Create") Product</h2>
                     </div>
                     <div class="mb-3">
-                        <label asp-for="Product.Name"></label>
-                        <input asp-for="Product.Name" class="form-control" />
-                        <span asp-validation-for="Product.Name" class="text-danger"></span>
+                        <label asp-for="Name"></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
                     </div>
                     <div class="mb-3">
-                        <label asp-for="Product.Description"></label>
-                        <textarea asp-for="Product.Description" rows="3" class="form-control"></textarea>
-                        <span asp-validation-for="Product.Description" class="text-danger"></span>
+                        <label asp-for="Description"></label>
+                        <textarea asp-for="Description" rows="3" class="form-control"></textarea>
+                        <span asp-validation-for="Description" class="text-danger"></span>
                     </div>
                     <div class="mb-3 col-6">
-                        <label asp-for="Product.Price"></label>
-                        <input asp-for="Product.Price" class="form-control" />
-                        <span asp-validation-for="Product.Price" class="text-danger"></span>
+                        <label asp-for="Price"></label>
+                        <input asp-for="Price" class="form-control" />
+                        <span asp-validation-for="Price" class="text-danger"></span>
                     </div>
                     <div class="mb-3 ">
-                        <label asp-for="Product.ImageUrl"></label>
+                        <label asp-for="ImageUrl"></label>
                         <input type="file" id="uploadBox" name="file" class="form-control" />
                     </div>
-                    <div class="mb-3 col-6">
-                        <label asp-for="Product.CategoryId"></label>
-                        <select asp-for="Product.CategoryId" asp-items="@Model.CategoryList" class="form-select">
-                            <option disabled selected>--Select Category--</option>
-                        </select>
-                        <span asp-validation-for="Product.CategoryId" class="text-danger"></span>
-                    </div>
-                    <div class="mb-3 col-6">
-                        <label asp-for="Product.ProductRatingId"></label>
-                        <select asp-for="Product.ProductRatingId" asp-items="@Model.RatingsList" class="form-select">
-                            <option disabled selected>--Select Rating--</option>
-                        </select>
-                        <span asp-validation-for="Product.ProductRatingId" class="text-danger"></span>
-                    </div>
-                    <div class="mb-3 col-6">
-                        <label>Product Statuses</label>
-                        @foreach (var status in statusList)
-                        {
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="selectedStatuses" value="@status.Id" id="status_@status.Id">
-                                <label class="form-check-label" for="status_@status.Id">@status.Status</label>
+
+                    @if (Model.Id != 0)
+                    {
+                        <div class="mb-3 col-6">
+                            <label asp-for="CategoryId"></label>
+                            <select asp-for="CategoryId" asp-items="@Model.CategoryList" class="form-select"></select>
+                            <span asp-validation-for="CategoryId" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3 col-6">
+                            <label asp-for="ProductRatingId"></label>
+                            <select asp-for="ProductRatingId" asp-items="@Model.RatingsList" class="form-select"></select>
+                            <span asp-validation-for="ProductRatingId" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3 col-6">
+                            <label asp-for="SelectedStatuses"></label>
+                            <select asp-for="SelectedStatuses" asp-items="@Model.StatusList" class="form-select" multiple>
+                            </select>
+                            <div class="mb-3 mt-1">
+                                <button type="button" onclick="deselectAllStatuses()">Deselect All Statuses</button>
                             </div>
-                        }
-                        <input asp-for="Product.ProductStatusMappings" hidden />
-                    </div>
+                        </div>
+                            
+                    }
+                    else
+                    {
+                        <div class="mb-3 col-6">
+                            <label asp-for="CategoryId"></label>
+                            <select asp-for="CategoryId" asp-items="@Model.CategoryList" class="form-select">
+                                <option disabled selected>--Select Category--</option>
+                            </select>
+                            <span asp-validation-for="CategoryId" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3 col-6">
+                            <label asp-for="ProductRatingId"></label>
+                            <select asp-for="ProductRatingId" asp-items="@Model.RatingsList" class="form-select">
+                                <option disabled selected>--Select Rating--</option>
+                            </select>
+                            <span asp-validation-for="ProductRatingId" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="SelectedStatuses"></label>
+                            <select asp-for="SelectedStatuses" asp-items="@Model.StatusList" class="form-select" multiple>
+                            </select>
+                        </div>
+                    }
                     <div class="col-12">
-                        @if (Model.Product.Id != 0)
+                        @if (Model.Id != 0)
                         {
                             <button type="submit" class="btn btn-primary" style="width:150px">Update</button>
                         }
@@ -80,7 +93,7 @@
                 </div>
             </div>
             <div class="col-2 pt-4">
-                <img src="@Model.Product.ImageUrl" width="100%" style="border-radius:5px; border:1px solid #bbb9b9" />
+                <img src="@Model.ImageUrl" width="100%" style="border-radius:5px; border:1px solid #bbb9b9" />
             </div>
         </div>
     </form>
@@ -102,14 +115,13 @@
             }
             return true;
         }
+        //DESELECT
+        function deselectAllStatuses() {
+            // Get the select element for the selected statuses
+            var selectedStatusesSelect = document.getElementById("SelectedStatuses");
 
-        var selectedStatuses = [];
-
-        $('input[name="selectedStatuses"]:checked').each(function () {
-            selectedStatuses.push($(this).val());
-        });
-
-        $('#selectedStatuses').val(selectedStatuses.join(','));
-
+            // Clear all selected options
+            Array.from(selectedStatusesSelect.options).forEach(option => option.selected = false);
+        }
     </script>
 }

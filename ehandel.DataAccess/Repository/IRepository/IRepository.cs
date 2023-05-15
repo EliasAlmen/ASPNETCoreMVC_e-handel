@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ehandel.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -11,10 +12,11 @@ namespace ehandel.DataAccess.Repository.IRepository
     {
         // T - Category
         Task<T> GetFirstOrDefault(Expression<Func<T, bool>> filter, string? includeProperties = null);
-        Task<IEnumerable<T>> GetAll(string? includeProperties = null);
+        Task<IEnumerable<T>> GetAll(Expression<Func<T, bool>>? filter = null, string? includeProperties = null);
         Task Add(T entity);
-		Task<T> GetByIdAsync(int id);
+        Task<T> GetByIdAsync(int id);
 		void Remove(T entity);
         void RemoveRange(IEnumerable<T> entity);
+        Task AddRange(IEnumerable<T> entity);
     }
 }

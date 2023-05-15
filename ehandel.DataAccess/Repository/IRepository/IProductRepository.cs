@@ -1,16 +1,16 @@
-﻿using Bulkybook.Models;
-using ehandel.DataAccess.Repository.IRepository;
+﻿using ehandel.DataAccess.Repository.IRepository;
 using ehandel.Models;
+using ehandel.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bulkybook.DataAccess.Repository.IRepository
+namespace ehandel.DataAccess.Repository.IRepository
 {
     public interface IProductRepository : IRepository<Product>
     {
-        void Update(Product obj);
+        Task UpdateAsync(ProductVM obj);
     }
 }

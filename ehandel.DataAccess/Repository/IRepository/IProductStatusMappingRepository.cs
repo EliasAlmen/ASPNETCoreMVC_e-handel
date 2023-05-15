@@ -10,7 +10,7 @@ namespace ehandel.DataAccess.Repository.IRepository
     public interface IProductStatusMappingRepository : IRepository<ProductStatusMapping>
     {
         void Update(ProductStatusMapping obj);
-        Task<List<ProductStatusMapping>> GetByProductIdAsync(int productId);
-
+        //Task<List<ProductStatusMapping>> GetByProductIdAsync(int productId);
+        //Task<ProductStatusMapping> GetByProductIdAndStatusIdAsync(int productId, int productStatusId);
     }
 }

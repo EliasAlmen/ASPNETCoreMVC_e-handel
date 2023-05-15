@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
@@ -35,7 +36,9 @@ namespace ehandel.Models
 		[ValidateNever]
         public ProductRating ProductRating { get; set; }
 
+        [ValidateNever]
         public ICollection<ProductStatusMapping> ProductStatusMappings { get; set; }
+
 
         [Required]
 		[Display(Name = "Category")]
@@ -43,5 +46,10 @@ namespace ehandel.Models
         [ForeignKey("CategoryId")]
         [ValidateNever]
 		public Category Category { get; set; }
-	}
+
+        public Product()
+        {
+            ProductStatusMappings = new List<ProductStatusMapping>();
+        }
+    }
 }
