@@ -1,0 +1,171 @@
+﻿@model Product
+<partial name="_HeroBannerPartial" />
+<main class="productdetails">
+    <div class="container">
+        <div class="content-textimg">
+            <div class="images">
+                <img width="501" height="413" src="@Model.ImageUrl" alt="" class="div1">
+                <img width="120" height="113" src="@Model.ImageUrl" alt="" class="div2">
+                <img width="120" height="113" src="@Model.ImageUrl" alt="" class="div3">
+                <img width="120" height="113" src="@Model.ImageUrl" alt="" class="div4">
+                <img width="120" height="113" src="@Model.ImageUrl" alt="" class="div5">
+            </div>
+            <div class="textinfo">
+                <div class="productname">@Model.Name</div>
+                <div class="productdescription">
+                    @Model.Description
+                </div>
+                <div class="border-mod"></div>
+                <div class="productrating">
+                    @{
+                        int rating = Model.ProductRatingId;
+                    }
+
+                    @for (int i = 1; i <= 5; i++)
+                    {
+                        if (i <= rating)
+                        {
+                            <i class="fa-solid fa-star active"></i>
+                        }
+                        else
+                        {
+                            <i class="fa-solid fa-star"></i>
+                        }
+
+                        if (i == rating)
+                        {
+                            break; // Exit the loop once the desired number of stars is displayed
+                        }
+                    }
+                    16 reviews
+                </div>
+                <div class="productprice">$@Model.Price.ToString("0.00")</div>
+                <form class="addtocart">
+                    <span>
+                        <span class="btn-group">
+                            <button class="btn disabled btn-outline-dark">-</button>
+                            <input disabled placeholder="1" />
+                            <button class="btn disabled btn-outline-dark">+</button>
+                        </span>
+                        <button class="btn-theme ms-4">
+                            Add to Cart
+                            <i class="icon fa-regular fa-cart-plus"></i>
+                        </button>
+                    </span>
+                </form>
+                <div class="inventory">
+                    <i class="fa-solid fa-circle text-danger"></i>
+                    <i class="fa-solid fa-circle text-warning"></i>
+                    <i class="fa-solid fa-circle text-info"></i>
+                    <span class="sku ms-5">SKU: @Model.SKU</span>
+                </div>
+                <div class="wishlist">
+                    <button class="btn-white">Add to wishlist</button>
+                </div>
+                <div class="category">Category: @Model.Category.Name</div>
+            </div>
+        </div>
+        <div class="content-tabs">
+            <div class="tab-buttons">
+                <button class="btn-theme">DESCRIPTION</button>
+                <button class="btn-white">ADDITIONAL INFO</button>
+                <button class="btn-white">REVIEWS (0)</button>
+                <button class="btn-white">SHIPPING & DELIVERY</button>
+            </div>
+
+            <div class="tab-info">
+                <h3 class="tab-title">
+                    Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie.
+                </h3>
+                <div class="tab-body">
+                    <div class="text">
+                        <p>
+                            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
+                            invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et
+                            cusam et
+                            justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata santus est
+                            Lorem
+                            ipsum dolor sit amet. Lorem ipsum dolor.
+                        </p>
+                        <p>
+                            accusantium laborum pretium hic excepturi harum repellat facilisis convallis potenti,
+                            adipiscing lectus aliqua. Asperiores repudiandae ipsam error erat, accusamus, cum taciti
+                            unde?
+                        </p>
+                        <p>
+                            Praesentium, pariatur, tempora consequuntur purus sapiente, iaculis vitae consequatur,
+                            rhoncus earum eleifend, hendrerit ipsum rhoncus ex error, impedit! Alias laboris sequi
+                            curae
+                            aptent? Eu sagittis eu, distinctio tortor? Dapibus delectus! Consequuntur luctus.
+                        </p>
+                        <p>
+                            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
+                            invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et
+                            cusam et
+                            justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata santus est
+                            Lorem
+                            ipsum dolor sit amet. Lorem ipsum dolor.
+                        </p>
+                    </div>
+                    <img width="469" height="356" src="@Model.ImageUrl" alt="hm">
+                </div>
+            </div>
+        </div>
+        <div class="content-related">
+            <h3 class="related-title">Related products</h3>
+            <div class="cards-container">
+                <a class="card-modified" href="#">
+                    <img src="assets/img/placeholders/270x295.svg" alt="Product" class="img">
+                    <div class="content">
+                        <div class="text-content">
+                            <div class="name">Table Lamp</div>
+                            <div class="price">$30.00</div>
+                        </div>
+                        <i class="icon fa-regular fa-cart-plus"></i>
+                    </div>
+                </a>
+                <a class="card-modified" href="#">
+                    <img src="assets/img/placeholders/270x295.svg" alt="Product" class="img">
+                    <div class="content">
+                        <div class="text-content">
+                            <div class="name">Table Lamp</div>
+                            <div class="price">$30.00</div>
+                        </div>
+                        <i class="icon fa-regular fa-cart-plus"></i>
+                    </div>
+                </a>
+                <a class="card-modified" href="#">
+                    <img src="assets/img/placeholders/270x295.svg" alt="Product" class="img">
+                    <div class="content">
+                        <div class="text-content">
+                            <div class="name">Table Lamp</div>
+                            <div class="price">$30.00</div>
+                        </div>
+                        <i class="icon fa-regular fa-cart-plus"></i>
+                    </div>
+                </a>
+                <a class="card-modified" href="#">
+                    <img src="assets/img/placeholders/270x295.svg" alt="Product" class="img">
+                    <div class="content">
+                        <div class="text-content">
+                            <div class="name">Table Lamp</div>
+                            <div class="price">$30.00</div>
+                        </div>
+                        <i class="icon fa-regular fa-cart-plus"></i>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="content-dontknow">
+            <div class="dontknow">
+                <div class="img-container">
+                    <img src="assets/img/placeholders/200x122.svg" alt="">
+                    <img src="assets/img/placeholders/200x122.svg" alt="">
+                    <img src="assets/img/placeholders/200x122.svg" alt="">
+                    <img src="assets/img/placeholders/200x122.svg" alt="">
+                    <img src="assets/img/placeholders/200x122.svg" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

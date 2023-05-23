@@ -8,21 +8,18 @@ html, body {
   color: #636363;
   background-color: white;
 }
-
-a {
+html a, body a {
+  color: #FA3150;
+  text-decoration: none;
+}
+html a:hover, body a:hover {
   text-decoration: none;
   color: #FA3150;
 }
-a:hover {
-  text-decoration: none;
-  color: #FA3150;
-}
-
-.link {
+html .link, body .link {
   text-decoration: none;
 }
-
-button {
+html button, body button {
   padding: 10px 35px;
   font-family: "Poppins", sans-serif;
   border: 1px solid #000000;
@@ -30,12 +27,11 @@ button {
   color: #000000;
   transition: all 0.2s;
 }
-button:hover {
+html button:hover, body button:hover {
   background-color: #000000;
   color: #FFFFFF;
 }
-
-.btn-white {
+html .btn-white, body .btn-white {
   border: none;
   background-color: #FFFFFF;
   color: #292929;
@@ -43,14 +39,12 @@ button:hover {
   width: 186px;
   height: 47px;
 }
-
-.btn-theme {
+html .btn-theme, body .btn-theme {
   border: none;
   background-color: #FA3150;
   color: #FFFFFF;
 }
-
-.hide {
+html .hide, body .hide {
   display: none;
 }
 
@@ -291,6 +285,9 @@ header .toggle .btn-white {
   color: #292929;
   margin-top: 20px;
 }
+.bestcollection .container .cards-container .card-modified .content .text-content .name:hover {
+  color: #FA3150;
+}
 .bestcollection .container .cards-container .card-modified .content .text-content .price {
   margin-top: 10px;
   font-size: 16px;
@@ -301,9 +298,14 @@ header .toggle .btn-white {
   font-size: 25px;
   color: #292929;
   margin-bottom: 5px;
+  opacity: 0; /* Hide the icon by default */
+  transition: opacity 0.2s ease;
 }
-.bestcollection .container .cards-container .card-modified:hover .text-content .name {
+.bestcollection .container .cards-container .card-modified .content .icon:hover {
   color: #FA3150;
+}
+.bestcollection .container .cards-container .card-modified:hover .content .icon {
+  opacity: 1;
 }
 .bestcollection .container button {
   margin: 30px;
@@ -731,11 +733,20 @@ header .toggle .btn-white {
 .productdetails .container .content-textimg .textinfo .productrating {
   margin: 5% 0;
 }
+.productdetails .container .content-textimg .textinfo .productrating i {
+  font-size: larger;
+  color: orange;
+}
 .productdetails .container .content-textimg .textinfo .productprice {
   margin: 5% 0;
+  font-size: x-large;
+  font-weight: 700;
 }
 .productdetails .container .content-textimg .textinfo .addtocart {
   margin: 5% 0;
+}
+.productdetails .container .content-textimg .textinfo .addtocart input {
+  width: 50px;
 }
 .productdetails .container .content-textimg .textinfo .inventory {
   margin: 5% 0;
@@ -745,6 +756,9 @@ header .toggle .btn-white {
 }
 .productdetails .container .content-textimg .textinfo .wishlist button {
   width: 194px;
+}
+.productdetails .container .content-textimg .textinfo .category {
+  color: #636363;
 }
 .productdetails .container .content-tabs {
   margin-bottom: 3%;
@@ -908,21 +922,37 @@ header .toggle .btn-white {
   width: 1138px;
   background-color: #FFFFFF;
   padding: 3%;
-  box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 2px 0px;
 }
 .container .content-form-account .formclass {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   gap: 30px 30px;
   grid-auto-flow: row;
-  grid-template-areas: "firstnameArea lastnameArea" "streetnameArea streetnameArea" "postalcodeArea cityArea" "mobileArea companyArea" "emailArea emailArea" "passwordArea passwordArea" "confirmpasswordArea confirmpasswordArea" "uploadprofileimgArea uploadprofileimgArea" "acceptArea acceptArea" "submitArea submitArea";
+  grid-template-areas: "validationArea validationArea" "firstnameArea lastnameArea" "streetnameArea streetnameArea" "postalcodeArea cityArea" "mobileArea companyArea" "emailArea emailArea" "passwordArea passwordArea" "confirmpasswordArea confirmpasswordArea" "uploadprofileimgArea uploadprofileimgArea" "acceptArea acceptArea" "roleArea roleArea" "submitArea submitArea";
+}
+.container .content-form-account .formclass .validation-summary-errors > ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: smaller;
+}
+.container .content-form-account .formclass .validation-summary-errors > ul > li {
+  color: red;
+  margin-right: 10px;
 }
 .container .content-form-account .formclass input {
   width: 100%;
   border: none;
-  background-color: #FAFAFA;
+  background-color: #F3F2F2;
   height: 50px;
+}
+.container .content-form-account .validationArea {
+  grid-area: validationArea;
 }
 .container .content-form-account .firstnameArea {
   grid-area: firstnameArea;
@@ -963,6 +993,9 @@ header .toggle .btn-white {
 .container .content-form-account .acceptArea input {
   height: 20px;
 }
+.container .content-form-account .roleArea {
+  grid-area: roleArea;
+}
 .container .content-form-account .submitArea {
   grid-area: submitArea;
 }
@@ -982,16 +1015,19 @@ header .toggle .btn-white {
 .container .content-form-login .formclass {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
   gap: 30px 0px;
   grid-auto-flow: row;
-  grid-template-areas: "emailLoginArea" "passwordLoginArea" "keepArea" "loginButtonArea";
+  grid-template-areas: "pleaseLoginArea" "emailLoginArea" "passwordLoginArea" "keepArea" "loginButtonArea";
 }
 .container .content-form-login .formclass input {
   width: 100%;
   border: none;
   background-color: #FAFAFA;
   height: 50px;
+}
+.container .content-form-login .formclass .pleaseLoginArea {
+  grid-area: pleaseLoginArea;
 }
 .container .content-form-login .formclass .emailLoginArea {
   grid-area: emailLoginArea;

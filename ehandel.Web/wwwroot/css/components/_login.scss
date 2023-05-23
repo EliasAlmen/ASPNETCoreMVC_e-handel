@@ -20,13 +20,14 @@
 
             display: grid;
             grid-template-columns: 1fr;
-            grid-template-rows: 1fr 1fr 1fr 1fr;
+            grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
             gap: 30px 0px;
             grid-auto-flow: row;
-            grid-template-areas: "emailLoginArea"
-            "passwordLoginArea"
-            "keepArea"
-            "loginButtonArea";
+            grid-template-areas: "pleaseLoginArea" "emailLoginArea" "passwordLoginArea" "keepArea" "loginButtonArea";
+
+            .pleaseLoginArea {
+                grid-area: pleaseLoginArea;
+            }
 
             .emailLoginArea {
                 grid-area: emailLoginArea;
@@ -43,7 +44,6 @@
             .loginButtonArea {
                 grid-area: loginButtonArea;
             }
-
         }
     }
 }

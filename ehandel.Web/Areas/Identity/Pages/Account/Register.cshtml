@@ -1,0 +1,99 @@
+﻿@page
+@model RegisterModel
+
+<section class="container">
+
+    <div class="content-form-account">
+        <p>Please Register Your new Account</p>
+
+        <form class="formclass" id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+
+            <div class="validationArea" asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+
+            <label class="firstnameArea">
+                First Name*
+                <br>
+                <input class="form-control" asp-for="Input.FirstName" aria-required="true">
+                <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+            </label>
+            
+
+            <label class="lastnameArea">
+                Last Name*
+                <br>
+                <input class="form-control" asp-for="Input.LastName" type="text" aria-required="true">
+                <span asp-validation-for="Input.LastName" class="text-danger"></span>
+            </label>
+            
+
+            <label class="streetnameArea">
+                Street Name*
+                <br>
+                <input class="form-control" asp-for="Input.StreetName" type="text" aria-required="true">
+                <span asp-validation-for="Input.StreetName" class="text-danger"></span>
+            </label>
+
+            <label class="postalcodeArea">
+                Postal Code*
+                <br>
+                <input class="form-control" asp-for="Input.PostalCode" type="text" aria-required="true">
+                <span asp-validation-for="Input.PostalCode" class="text-danger"></span>
+            </label>
+
+            <label class="cityArea">
+                City*
+                <br>
+                <input class="form-control" asp-for="Input.City" type="text" aria-required="true">
+                <span asp-validation-for="Input.City" class="text-danger"></span>
+            </label>
+
+            <label class="mobileArea">
+                Mobile (optional)
+                <br>
+                <input class="form-control" asp-for="Input.PhoneNumber" type="text">
+            </label>
+
+            <label class="companyArea">
+                Company (optional)
+                <br>
+                <input class="form-control" asp-for="Input.CompanyName" type="text">
+            </label>
+
+            <label class="emailArea">
+                E-mail*
+                <br>
+                <input class="form-control" asp-for="Input.Email" type="email" aria-required="true">
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+            </label>
+
+            <label class="passwordArea">
+                Password*
+                <br>
+                <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="Password">
+                <span asp-validation-for="Input.Password" class="text-danger"></span>
+            </label>
+
+            <label class="confirmpasswordArea">
+                Confirm Password*
+                <br>
+                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="Confirm Password">
+                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+            </label>
+
+            <label class="uploadprofileimgArea">Upload Profile Image (optional)<br><input type="text" name="inputProfileimg"></label>
+
+            <span class="acceptArea"><input type="checkbox" name="inputSave" id="">I have read and accepts the terms and agreements</span>
+
+            @if (User.IsInRole("Admin")){
+            <select class="roleArea mb-5" asp-for="Input.Role" asp-items="@Model.Input.RoleList">
+                <option disabled selected>Select Role - For development only</option>
+            </select>
+            }
+            <button id="registerSubmit" class="submitArea btn-theme" type="submit">Submit</button>
+        </form>
+    </div>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

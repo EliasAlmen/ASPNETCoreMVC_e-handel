@@ -4,53 +4,53 @@ html, body {
     font-weight: $font-weight-regular;
     color: $color-grey;
     background-color: white;
-}
 
-a {
-    text-decoration: none;
-    color: $color-theme-red;
-
-    &:hover {
-        text-decoration: none;
+    a {
         color: $color-theme-red;
+        text-decoration: none;
+
+
+        &:hover {
+            text-decoration: none;
+            color: $color-theme-red;
+        }
     }
-}
 
-.link{
-    text-decoration: none;
-}
+    .link {
+        text-decoration: none;
+    }
 
-button {
-    padding: 10px 35px;
-    font-family: $font-poppins;
-    border: 1px solid $color-black;
-    background-color: transparent;
-    color: $color-black;
-    transition: all 0.2s;
-    
+    button {
+        padding: 10px 35px;
+        font-family: $font-poppins;
+        border: 1px solid $color-black;
+        background-color: transparent;
+        color: $color-black;
+        transition: all 0.2s;
 
-    &:hover {
-        background-color: $color-black;
+
+        &:hover {
+            background-color: $color-black;
+            color: $color-white;
+        }
+    }
+
+    .btn-white {
+        border: none;
+        background-color: $color-white;
+        color: $color-dark-grey;
+        border: 1px solid $color-dark-grey;
+        width: 186px;
+        height: 47px;
+    }
+
+    .btn-theme {
+        border: none;
+        background-color: $color-theme-red;
         color: $color-white;
     }
-}
 
-.btn-white {
-    border: none;
-    background-color: $color-white;
-    color: $color-dark-grey;
-    border : 1px solid $color-dark-grey;
-    width: 186px;
-    height: 47px;
+    .hide {
+        display: none;
+    }
 }
-
-.btn-theme {
-    border: none;
-    background-color: $color-theme-red;
-    color: $color-white;
-}
-
-.hide {
-    display: none;
-}
-

@@ -1,4 +1,5 @@
 ﻿using ehandel.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ehandel.DataAccess.Data
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
@@ -21,6 +22,9 @@ namespace ehandel.DataAccess.Data
         public DbSet<ProductRating> ProductRatings { get; set; }
         public DbSet<ProductStatus> ProductStatuses { get; set; }
         public DbSet<ProductStatusMapping> ProductStatusMappings { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        public DbSet<ApplicationUserAddress> ApplicationUserAddresses { get; set; }
+        public DbSet<ApplicationUserCompany> ApplicationUserCompanies { get; set; }
 
         // SEED DATA
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -141,7 +145,7 @@ namespace ehandel.DataAccess.Data
                             SKU = "04acc686-02ca-4e4a-adc1-cb6bb3f297c4",
                             Name = "Placeholder product",
                             Description = "Placeholder description",
-                            Price = 99.99,
+                            Price = 99,
                             ImageUrl = "\\img\\products\\placeholder.svg",
                             CreatedDateTime = DateTime.Now.ToString("g"),
                             CategoryId = 1,
@@ -170,11 +174,49 @@ namespace ehandel.DataAccess.Data
                         Company = "Acme Inc.",
                         Comment = "This is a test comment.",
                         TimeOfContact = DateTime.Now
+                    },
+                    new ContactUs
+                    {
+                        Id = 2,
+                        Name = "Jane Smith",
+                        Email = "janesmith@example.com",
+                        Phone = "987-654-3210",
+                        Company = "XYZ Corporation",
+                        Comment = "Lorem ipsum dolor sit amet.",
+                        TimeOfContact = DateTime.Now
+                    },
+                    new ContactUs
+                    {
+                        Id = 3,
+                        Name = "Michael Johnson",
+                        Email = "michaeljohnson@example.com",
+                        Phone = "555-123-4567",
+                        Company = "ABC Industries",
+                        Comment = "Testing randomization.",
+                        TimeOfContact = DateTime.Now
+                    },
+                    new ContactUs
+                    {
+                        Id = 4,
+                        Name = "Emily Davis",
+                        Email = "emilydavis@example.com",
+                        Phone = "111-222-3333",
+                        Company = "Global Enterprises",
+                        Comment = "Hello world!",
+                        TimeOfContact = DateTime.Now
+                    },
+                    new ContactUs
+                    {
+                        Id = 5,
+                        Name = "David Brown",
+                        Email = "davidbrown@example.com",
+                        Phone = "444-555-6666",
+                        Company = "Smith & Co.",
+                        Comment = "Random comment here.",
+                        TimeOfContact = DateTime.Now
                     }
                 ); 
             #endregion
-
-            
 
         }
     }

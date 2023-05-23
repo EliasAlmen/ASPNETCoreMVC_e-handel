@@ -1,0 +1,45 @@
+﻿@page
+@model LoginModel
+
+<section class="container">
+    <div class="content-form-login">
+        <form class="formclass" id="account" method="post">
+            <p class="pleaseLoginArea">
+                Please Login to Your Account
+            </p>
+            <hr />
+            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+            <div class="emailLoginArea">
+                <label asp-for="Input.Email" class="form-label">E-mail*</label>
+                <a class="ms-5" asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">
+                    Don't have an Account yet?
+                </a>
+                <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true"/>
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+            </div>
+            <div class="passwordLoginArea">
+                <label asp-for="Input.Password" class="form-label">Password*</label>
+                <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true"/>
+                <span asp-validation-for="Input.Password" class="text-danger"></span>
+            </div>
+            <div class="keepArea">
+                <label asp-for="Input.RememberMe" class="form-label">
+                    <input class="form-check-input" asp-for="Input.RememberMe" />
+                    @Html.DisplayNameFor(m => m.Input.RememberMe)
+                </label>
+            </div>
+            <div class="loginButtonArea">
+                <button id="login-submit" type="submit" class="btn-theme">Log in</button>
+            </div>
+            <div>
+                <p>
+                </p>
+            </div>
+        </form>
+    </div>
+</section>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

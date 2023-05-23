@@ -1,0 +1,19 @@
+﻿@model Product
+
+<div class="card-modified" href="#">
+    <a asp-action="Details" asp-route-productId="@Model.Id">
+        <img height="295" width="270" src="@Model.ImageUrl" alt="Product card" class="img">
+    </a>
+    
+    <div class="content">
+        <div class="text-content">
+            <a asp-action="Details" asp-route-productId="@Model.Id">
+                <div class="name">@Model.Name</div>
+            </a>
+            <div class="price">$@Model.Price.ToString("0.00")</div>
+        </div>
+        <a asp-action="Details" asp-route-productId="@Model.Id">
+        <i class="icon fa-regular fa-cart-plus"></i>
+        </a>
+    </div>
+</div>

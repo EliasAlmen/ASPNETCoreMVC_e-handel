@@ -20,7 +20,7 @@ namespace ehandel.Models
 		[Required]
 		public string Description { get; set; }
 		[Required]
-		[Range(1, 99999)]
+		[Range(1, 999999)]
 		[Column(TypeName = "money")]
 		public double Price { get; set; }
 		[ValidateNever]
