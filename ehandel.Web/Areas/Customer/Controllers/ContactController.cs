@@ -1,18 +1,19 @@
 ﻿using ehandel.DataAccess.Repository.IRepository;
 using ehandel.Models;
+using ehandel.Models.SD;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel;
 
 namespace ehandel.Web.Areas.Customer.Controllers
 {
-    [Area("Customer")]
+    [Area(SD.Role_User_Customer)]
     public class ContactController : Controller
     {
-        private readonly IUnitOfWork _service;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public ContactController(IUnitOfWork service)
+        public ContactController(IUnitOfWork unitOfWork)
         {
-            _service = service;
+            _unitOfWork = unitOfWork;
         }
 
         public IActionResult Index()
@@ -27,8 +28,8 @@ namespace ehandel.Web.Areas.Customer.Controllers
         {
             if (ModelState.IsValid)
             {
-                await _service.ContactUs.Add(obj);
-                await _service.Save();
+                await _unitOfWork.ContactUs.AddToDbAsync(obj);
+                await _unitOfWork.SaveAsync();
                 TempData["success"] = "Comment sent successfully";
                 return RedirectToAction("Index");
             }

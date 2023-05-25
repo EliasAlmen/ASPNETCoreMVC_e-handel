@@ -47,9 +47,5 @@ namespace ehandel.Models
         [ValidateNever]
 		public Category Category { get; set; }
 
-        public Product()
-        {
-            ProductStatusMappings = new List<ProductStatusMapping>();
-        }
     }
 }

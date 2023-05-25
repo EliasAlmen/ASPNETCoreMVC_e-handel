@@ -22,7 +22,7 @@ namespace ehandel.Models
         public string? Company { get; set; }
         [Required]
         [Display(Name = "Comment")]
-        [StringLength(500, MinimumLength = 3, ErrorMessage = "Please keep within comment character limits.")]
+        [StringLength(500, MinimumLength = 3, ErrorMessage = "Please keep within comment character limits. 3-500 words.")]
         public string Comment { get; set; }
         public DateTime TimeOfContact { get; set; } = DateTime.Now;
     }

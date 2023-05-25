@@ -1,25 +1,26 @@
 ﻿using ehandel.DataAccess.Repository.IRepository;
 using ehandel.Models;
+using ehandel.Models.SD;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
 
 namespace ehandel.Web.Areas.Admin.Controllers
 {
-    [Area("Admin")]
-    [Authorize(Roles = "Admin")]
+    [Area(SD.Role_User_Admin)]
+    [Authorize(Roles = SD.Role_User_Admin)]
     public class ContactAdminController : Controller
     {
-        private readonly IUnitOfWork _service;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public ContactAdminController(IUnitOfWork service)
+        public ContactAdminController(IUnitOfWork unitOfWork)
         {
-            _service = service;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<IActionResult> CommentList()
         {
-            IEnumerable<ContactUs> objContactUsList = await _service.ContactUs.GetAll();
+            IEnumerable<ContactUs> objContactUsList = await _unitOfWork.ContactUs.GetAllAsync();
             return View(objContactUsList);
         }
 
@@ -30,8 +31,7 @@ namespace ehandel.Web.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-            //var contactUsFromDb = _db.Categories.Find(id);
-            var contactUsFromDb = await _service.ContactUs.GetFirstOrDefault(u => u.Id == id);
+            var contactUsFromDb = await _unitOfWork.ContactUs.GetFirstOrDefaultAsync(u => u.Id == id);
 
             if (contactUsFromDb == null)
             {
@@ -46,13 +46,13 @@ namespace ehandel.Web.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeletePOST(int? id)
         {
-            var obj = await _service.ContactUs.GetFirstOrDefault(u => u.Id == id);
+            var obj = await _unitOfWork.ContactUs.GetFirstOrDefaultAsync(u => u.Id == id);
             if (obj == null)
             {
                 return NotFound();
             }
-            _service.ContactUs.Remove(obj);
-            await _service.Save();
+            _unitOfWork.ContactUs.Remove(obj);
+            await _unitOfWork.SaveAsync();
             TempData["success"] = "Deleted successfully";
             return RedirectToAction("CommentList");
         }

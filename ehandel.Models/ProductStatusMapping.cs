@@ -19,20 +19,3 @@ namespace ehandel.Models
         public ProductStatus ProductStatus { get; set; }
     }
 }
-
-
-
-
-
-
-
-//public class ProductStatusMapping
-//{
-//    public int ProductId { get; set; }
-//    [JsonIgnore]
-//    public Product Product { get; set; }
-
-
-//    public int ProductStatusId { get; set; }
-//    public ProductStatus ProductStatus { get; set; }
-//}

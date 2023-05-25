@@ -6,9 +6,11 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using ehandel.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 
 namespace ehandel.Web.Areas.Identity.Pages.Account.Manage
 {
@@ -58,6 +60,23 @@ namespace ehandel.Web.Areas.Identity.Pages.Account.Manage
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
+
+            [Display(Name = "First name")]
+            public string FirstName { get; set; }
+
+            [Display(Name = "Last name")]
+            public string LastName { get; set; }
+
+            [Display(Name = "Street address")]
+            public string StreetAddress { get; set; }
+
+            [Display(Name = "City")]
+            public string City { get; set; }
+
+            [Display(Name = "Postal code")]
+            public string PostalCode { get; set; }
+            [Display(Name = "Company")]
+            public string Company { get; set; }
         }
 
         private async Task LoadAsync(IdentityUser user)
@@ -67,9 +86,23 @@ namespace ehandel.Web.Areas.Identity.Pages.Account.Manage
 
             Username = userName;
 
+            // Retrieve the ApplicationUser associated with the IdentityUser
+            var applicationUser = await _userManager.Users
+                .OfType<ApplicationUser>()
+                .Include(u => u.ApplicationUserAddress)
+                .Include(u => u.ApplicationUserCompany)
+                .FirstOrDefaultAsync(u => u.UserName == userName);
+
             Input = new InputModel
             {
-                PhoneNumber = phoneNumber
+                PhoneNumber = phoneNumber,
+                // Set the values of your ApplicationUser properties
+                FirstName = applicationUser.FirstName,
+                LastName = applicationUser.LastName,
+                StreetAddress = applicationUser.ApplicationUserAddress?.StreetName,
+                City = applicationUser.ApplicationUserAddress?.City,
+                PostalCode = applicationUser.ApplicationUserAddress?.PostalCode,
+                Company = applicationUser.ApplicationUserCompany?.CompanyName
             };
         }
 
@@ -109,6 +142,36 @@ namespace ehandel.Web.Areas.Identity.Pages.Account.Manage
                     return RedirectToPage();
                 }
             }
+
+
+            // Update other properties if needed
+            var applicationUser = await _userManager.Users
+               .OfType<ApplicationUser>()
+               .Include(u => u.ApplicationUserAddress)
+               .Include(u => u.ApplicationUserCompany)
+               .FirstOrDefaultAsync(u => u.UserName == user.UserName);
+
+            applicationUser.FirstName = Input.FirstName;
+            applicationUser.LastName = Input.LastName;
+
+            if (applicationUser.ApplicationUserAddress == null)
+            {
+                // Create a new address if it doesn't exist
+                applicationUser.ApplicationUserAddress = new ApplicationUserAddress();
+            }
+            if (applicationUser.ApplicationUserCompany == null)
+            {
+                // Create a new address if it doesn't exist
+                applicationUser.ApplicationUserCompany = new ApplicationUserCompany();
+            }
+            applicationUser.ApplicationUserAddress.StreetName = Input.StreetAddress;
+            applicationUser.ApplicationUserAddress.City = Input.City;
+            applicationUser.ApplicationUserAddress.PostalCode = Input.PostalCode;
+            applicationUser.ApplicationUserCompany.CompanyName = Input.Company;
+
+
+            await _userManager.UpdateAsync(applicationUser);
+
 
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";

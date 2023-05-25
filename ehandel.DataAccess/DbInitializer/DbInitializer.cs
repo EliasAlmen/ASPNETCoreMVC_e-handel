@@ -60,13 +60,37 @@ namespace ehandel.DataAccess.DbInitializer
                     },
                     ApplicationUserCompany = new ApplicationUserCompany
                     {
-                        CompanyName = "Company"
+                        CompanyName = "XYZ Company"
                     }
                 }, "BytMig123!").GetAwaiter().GetResult();
 
                 ApplicationUser user = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "admin@domain.com");
                 
                 _userManager.AddToRoleAsync(user, SD.Role_User_Admin).GetAwaiter().GetResult();
+
+
+                _userManager.CreateAsync(new ApplicationUser
+                {
+                    UserName = "customer@domain.com",
+                    Email = "customer@domain.com",
+                    FirstName = "Zywoo",
+                    LastName = "Vitality",
+                    PhoneNumber = "0731234567",
+                    ApplicationUserAddress = new ApplicationUserAddress
+                    {
+                        StreetName = "vägen 2",
+                        City = "Staden",
+                        PostalCode = "1337"
+                    },
+                    ApplicationUserCompany = new ApplicationUserCompany
+                    {
+                        CompanyName = "ABC Systems"
+                    }
+                }, "BytMig123!").GetAwaiter().GetResult();
+
+                ApplicationUser userCustomer = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "customer@domain.com");
+
+                _userManager.AddToRoleAsync(userCustomer, SD.Role_User_Customer).GetAwaiter().GetResult();
             }
             return;
         }

@@ -9,6 +9,10 @@ using System.Threading.Tasks;
 
 namespace ehandel.DataAccess.Repository
 {
+
+    /// <summary>
+    /// UNIT OF WORK
+    /// </summary>
     public class UnitOfWork : IUnitOfWork
     {
         private ApplicationDbContext _db;
@@ -36,7 +40,7 @@ namespace ehandel.DataAccess.Repository
         public IApplicationUserCompanyRepository ApplicationUserCompany { get; private set; }
         public IApplicationUserRepository ApplicationUser { get; private set; }
 
-        public async Task Save()
+        public async Task SaveAsync()
         {
             await _db.SaveChangesAsync();
         }

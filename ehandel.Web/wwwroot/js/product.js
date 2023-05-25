@@ -23,7 +23,7 @@ function loadDataTable() {
             },
             { "data": "sku",          "width": "25%" },
             { "data": "name",           "width": "10%" },
-            { "data": "description",           "width": "20%" },
+            { "data": "description", "width": "20%", "className": "description-column" },
             {
                 "data": "productStatusMappings",
                 "render": function (data) {

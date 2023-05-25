@@ -1,25 +1,26 @@
 ﻿using ehandel.DataAccess.Repository;
 using ehandel.DataAccess.Repository.IRepository;
 using ehandel.Models;
+using ehandel.Models.SD;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ehandel.Web.Areas.Admin.Controllers
 {
-    [Area("Admin")]
-    [Authorize(Roles = "Admin")]
+    [Area(SD.Role_User_Admin)]
+    [Authorize(Roles = SD.Role_User_Admin)]
     public class CategoryController : Controller
     {
-        private readonly IUnitOfWork _service;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public CategoryController(IUnitOfWork service)
+        public CategoryController(IUnitOfWork unitOfWork)
         {
-            _service = service;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<IActionResult> Index()
         {
-            IEnumerable<Category> objCategoryList = await _service.Category.GetAll();
+            IEnumerable<Category> objCategoryList = await _unitOfWork.Category.GetAllAsync();
             return View(objCategoryList);
         }
 
@@ -34,7 +35,7 @@ namespace ehandel.Web.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Category obj)
         {
-            IEnumerable<Category> objCategoryList = await _service.Category.GetAll();
+            IEnumerable<Category> objCategoryList = await _unitOfWork.Category.GetAllAsync();
 
             if (objCategoryList.Any(u => u.Name == obj.Name))
             {
@@ -43,8 +44,8 @@ namespace ehandel.Web.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
-                await _service.Category.Add(obj);
-                await _service.Save();
+                await _unitOfWork.Category.AddToDbAsync(obj);
+                await _unitOfWork.SaveAsync();
                 TempData["success"] = "Added successfully";
                 return RedirectToAction("Index");
             }
@@ -59,7 +60,7 @@ namespace ehandel.Web.Areas.Admin.Controllers
                 return NotFound();
             }
             //var categoryFromDb = _db.Categories.Find(id);
-            var categoryFromDb = await _service.Category.GetFirstOrDefault(u => u.Id == id);
+            var categoryFromDb = await _unitOfWork.Category.GetFirstOrDefaultAsync(u => u.Id == id);
 
             if (categoryFromDb == null)
             {
@@ -76,8 +77,8 @@ namespace ehandel.Web.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                _service.Category.Update(obj);
-                await _service.Save();
+                _unitOfWork.Category.Update(obj);
+                await _unitOfWork.SaveAsync();
                 TempData["success"] = "Updated successfully";
                 return RedirectToAction("Index");
             }
@@ -93,7 +94,7 @@ namespace ehandel.Web.Areas.Admin.Controllers
                 return NotFound();
             }
             //var categoryFromDb = _db.Categories.Find(id);
-            var categoryFromDb = await _service.Category.GetFirstOrDefault(u => u.Id == id);
+            var categoryFromDb = await _unitOfWork.Category.GetFirstOrDefaultAsync(u => u.Id == id);
 
             if (categoryFromDb == null)
             {
@@ -108,13 +109,13 @@ namespace ehandel.Web.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeletePOST(int? id)
         {
-            var obj = await _service.Category.GetFirstOrDefault(u => u.Id == id);
+            var obj = await _unitOfWork.Category.GetFirstOrDefaultAsync(u => u.Id == id);
             if (obj == null)
             {
                 return NotFound();
             }
-            _service.Category.Remove(obj);
-            await _service.Save();
+            _unitOfWork.Category.Remove(obj);
+            await _unitOfWork.SaveAsync();
             TempData["success"] = "Deleted successfully";
             return RedirectToAction("Index");
         }

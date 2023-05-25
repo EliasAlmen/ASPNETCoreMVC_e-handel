@@ -1,0 +1,11 @@
+﻿@model IEnumerable<Product>
+<main class="bestcollection">
+    <div class="container">
+        <div class="cards-container">
+            @foreach (var product in Model)
+            {
+                await Html.RenderPartialAsync("_ProductCardPartial", product);
+            }
+        </div>
+    </div>
+</main>

@@ -1,22 +1,19 @@
-﻿@model IEnumerable<Product>
+﻿@using ehandel.Models.viewModels;
+@model HomeIndexVM
 
 
 <main class="bestcollection">
     <div class="container">
         <h1 class="title">Best Collection</h1>
         <ul class="categories">
-            <li class="category-item">All</li>
-            <li class="category-item">Bag</li>
-            <li class="category-item">Dress</li>
-            <li class="category-item">Decoration</li>
-            <li class="category-item">Essentials</li>
-            <li class="category-item">Interior</li>
-            <li class="category-item">Laptop</li>
-            <li class="category-item">Mobile</li>
-            <li class="category-item">Beaty</li>
+            @foreach (var cat in Model.CategoryList)
+            {
+                <li class="category-item">@cat.Name</li>
+            }
         </ul>
         <div class="cards-container">
-            @foreach (var product in Model)
+            @*Takes 8 products regarless of statuses*@
+            @foreach (var product in Model.AllProducts.Take(8))
             {
                 await Html.RenderPartialAsync("_ProductCardPartial", product);
             }

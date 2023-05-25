@@ -11,6 +11,10 @@ using System.Threading.Tasks;
 
 namespace ehandel.DataAccess.Repository
 {
+    /// <summary>
+    /// Repo pattern
+    /// </summary>
+    /// <typeparam name="T">input class</typeparam>
     public class Repository<T> : IRepository<T> where T : class
     {
         private readonly ApplicationDbContext _db;
@@ -20,24 +24,30 @@ namespace ehandel.DataAccess.Repository
             _db = db;
             this.dbSet = _db.Set<T>();
         }
-        public async Task Add(T entity)
+        public async Task AddToDbAsync(T entity)
         {
+            //Add to DB
             await dbSet.AddAsync(entity);
         }
 
-        public async Task<IEnumerable<T>> GetAll(Expression<Func<T, bool>>? filter = null, string? includeProperties = null)
+        public async Task<IEnumerable<T>> GetAllAsync(Expression<Func<T, bool>>? filter = null, string? includeProperties = null)
         {
+            // Create an IQueryable object based on the DbSet<T> property
             IQueryable<T> query = dbSet;
 
+            // Apply the filter expression if provided
             if (filter != null)
             {
                 query = query.Where(filter);
             }
 
+            // Include related properties if specified
             if (includeProperties != null)
             {
+                // Split the comma-separated include properties
                 foreach (var includeProp in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
                 {
+                    // Add each include property to the query using the Include method
                     query = query.Include(includeProp);
                 }
             }
@@ -47,11 +57,12 @@ namespace ehandel.DataAccess.Repository
 
         public async Task<T> GetByIdAsync(int id)
         {
+            // find by Id
             return await dbSet.FindAsync(id);
         }
 
-
-        public async Task<T> GetFirstOrDefault(Expression<Func<T, bool>> filter, string? includeProperties = null)
+        // Same as above but returns one obj
+        public async Task<T> GetFirstOrDefaultAsync(Expression<Func<T, bool>> filter, string? includeProperties = null)
         {
             IQueryable<T> query = dbSet;
 
@@ -76,7 +87,7 @@ namespace ehandel.DataAccess.Repository
             dbSet.RemoveRange(entity);
         }
 
-        public async Task AddRange(IEnumerable<T> entity)
+        public async Task AddRangeAsync(IEnumerable<T> entity)
         {
             await dbSet.AddRangeAsync(entity);
         }

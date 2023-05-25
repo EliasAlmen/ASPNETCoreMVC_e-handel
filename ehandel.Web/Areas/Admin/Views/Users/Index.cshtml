@@ -1,0 +1,99 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject UserManager<IdentityUser> userManager
+@inject RoleManager<IdentityRole> roleManager
+@using Microsoft.EntityFrameworkCore;
+@using ehandel.Models
+@using ehandel.DataAccess.Data
+
+@{
+    var dbContext = Context.RequestServices.GetService<ApplicationDbContext>(); // Inject the ApplicationDbContext
+    var users = dbContext.ApplicationUsers
+        .Include(u => u.ApplicationUserAddress)
+        .Include(u => u.ApplicationUserCompany)
+        .OfType<ApplicationUser>()
+        .ToList();
+    var usersWithRoles = users.OfType<ApplicationUser>().ToList();
+    var roles = roleManager.Roles.ToList();
+}
+
+<div class="container d-block">
+    <h1 class="pt-5">User List</h1>
+    <table class="table table-bordered table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>
+                    User name
+                </th>
+                <th>
+                    First name
+                </th>
+                <th>
+                    Last name
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Phone number
+                </th>
+                <th>
+                    City
+                </th>
+                <th>
+                    Street address
+                </th>
+                <th>
+                    Postal code
+                </th>
+                <th>
+                    Company
+                </th>
+                <th>
+                    Role
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in usersWithRoles)
+            {
+                var userRoles = await userManager.GetRolesAsync(user);
+
+                <tr>
+                    <td width="10%">
+                        @user.UserName
+                    </td>
+                    <td width="10%">
+                        @user.FirstName
+                    </td>
+                    <td width="10%">
+                        @user.LastName
+                    </td>
+                    <td width="15%">
+                        @user.Email
+                    </td>
+                    <td width="10%">
+                        @user.PhoneNumber
+                    </td>
+                    <td width="10%">
+                        @user.ApplicationUserAddress.City
+                    </td>
+                    <td width="10%">
+                        @user.ApplicationUserAddress.StreetName
+                    </td>
+                    <td width="10%">
+                        @user.ApplicationUserAddress.PostalCode
+                    </td>
+                    <td width="10%">
+                        @user.ApplicationUserCompany?.CompanyName
+                    </td>
+                    @foreach (var role in userRoles)
+                    {
+                        <td width="10%">
+                            @role
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

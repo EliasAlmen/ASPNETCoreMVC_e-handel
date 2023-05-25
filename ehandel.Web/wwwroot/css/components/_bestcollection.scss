@@ -71,7 +71,8 @@
             }
 
             .card-modified {
-                // height: 377px;
+                width: 270px;
+                height: 385px;
                 box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
                 text-decoration: none;
 
@@ -79,10 +80,10 @@
                     display: flex;
                     justify-content: space-between;
                     align-items: flex-end;
-                    padding-bottom: 15px;
-                    padding-right: 15px;
+
 
                     .text-content {
+
                         .name {
                             font-size: 18px;
                             font-family: $font-poppins;
@@ -106,7 +107,6 @@
                     .icon {
                         font-size: 25px;
                         color: $color-dark-grey;
-                        margin-bottom: 5px;
                         opacity: 0; /* Hide the icon by default */
                         transition: opacity 0.2s ease;
 

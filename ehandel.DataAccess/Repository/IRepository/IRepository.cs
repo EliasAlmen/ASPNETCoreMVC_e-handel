@@ -10,13 +10,13 @@ namespace ehandel.DataAccess.Repository.IRepository
 {
     public interface IRepository<T> where T : class
     {
-        // T - Category
-        Task<T> GetFirstOrDefault(Expression<Func<T, bool>> filter, string? includeProperties = null);
-        Task<IEnumerable<T>> GetAll(Expression<Func<T, bool>>? filter = null, string? includeProperties = null);
-        Task Add(T entity);
+        
+        Task<T> GetFirstOrDefaultAsync(Expression<Func<T, bool>> filter, string? includeProperties = null);
+        Task<IEnumerable<T>> GetAllAsync(Expression<Func<T, bool>>? filter = null, string? includeProperties = null);
+        Task AddToDbAsync(T entity);
         Task<T> GetByIdAsync(int id);
 		void Remove(T entity);
         void RemoveRange(IEnumerable<T> entity);
-        Task AddRange(IEnumerable<T> entity);
+        Task AddRangeAsync(IEnumerable<T> entity);
     }
 }

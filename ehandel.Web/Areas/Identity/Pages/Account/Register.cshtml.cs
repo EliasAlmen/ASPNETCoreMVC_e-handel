@@ -155,7 +155,7 @@ namespace ehandel.Web.Areas.Identity.Pages.Account
                 user.ApplicationUserAddress = new ApplicationUserAddress();
                 user.ApplicationUserCompany = new ApplicationUserCompany();
 
-                var checkExistingCompany = await _unitOfWork.ApplicationUserCompany.GetFirstOrDefault(c => c.CompanyName == Input.CompanyName);
+                var checkExistingCompany = await _unitOfWork.ApplicationUserCompany.GetFirstOrDefaultAsync(c => c.CompanyName == Input.CompanyName);
 
                 if (checkExistingCompany != null)
                 {
@@ -167,7 +167,7 @@ namespace ehandel.Web.Areas.Identity.Pages.Account
                     var newCompany = new ApplicationUserCompany { CompanyName = Input.CompanyName };
                     user.ApplicationUserCompany = newCompany;
                 }
-                var checkExistingAddress = await _unitOfWork.ApplicationUserAddress.GetFirstOrDefault(c => c.StreetName == Input.StreetName && c.PostalCode == Input.PostalCode);
+                var checkExistingAddress = await _unitOfWork.ApplicationUserAddress.GetFirstOrDefaultAsync(c => c.StreetName == Input.StreetName && c.PostalCode == Input.PostalCode);
                 if (checkExistingAddress != null)
                 {
                     user.ApplicationUserAddress = checkExistingAddress;

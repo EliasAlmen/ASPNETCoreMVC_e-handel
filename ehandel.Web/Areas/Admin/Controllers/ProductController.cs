@@ -1,6 +1,7 @@
 ﻿using ehandel.DataAccess.Repository;
 using ehandel.DataAccess.Repository.IRepository;
 using ehandel.Models;
+using ehandel.Models.SD;
 using ehandel.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,17 +12,17 @@ using System.Linq;
 
 namespace ehandel.Web.Areas.Admin.Controllers
 {
-    [Area("Admin")]
-    [Authorize(Roles = "Admin")]
+    [Area(SD.Role_User_Admin)]
+    [Authorize(Roles = SD.Role_User_Admin)]
     public class ProductController : Controller
     {
-        private readonly IUnitOfWork _service;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public ProductController(IWebHostEnvironment webHostEnvironment, IUnitOfWork service)
+        public ProductController(IWebHostEnvironment webHostEnvironment, IUnitOfWork unitOfWork)
         {
             _webHostEnvironment = webHostEnvironment;
-            _service = service;
+            _unitOfWork = unitOfWork;
         }
 
         public IActionResult Index()
@@ -39,17 +40,17 @@ namespace ehandel.Web.Areas.Admin.Controllers
             {
                 productVM = new ProductVM
                 {
-                    CategoryList = (await _service.Category.GetAll()).Select(i => new SelectListItem
+                    CategoryList = (await _unitOfWork.Category.GetAllAsync()).Select(i => new SelectListItem
                     {
                         Text = i.Name,
                         Value = i.Id.ToString()
                     }),
-                    RatingsList = (await _service.ProductRating.GetAll()).Select(i => new SelectListItem
+                    RatingsList = (await _unitOfWork.ProductRating.GetAllAsync()).Select(i => new SelectListItem
                     {
                         Text = i.Rating,
                         Value = i.Id.ToString()
                     }),
-                    StatusList = (await _service.ProductStatus.GetAll()).Select(i => new SelectListItem
+                    StatusList = (await _unitOfWork.ProductStatus.GetAllAsync()).Select(i => new SelectListItem
                     {
                         Text = i.Status,
                         Value = i.Id.ToString()
@@ -58,7 +59,7 @@ namespace ehandel.Web.Areas.Admin.Controllers
             }
             else
             {
-                var existingProduct = await _service.Product.GetFirstOrDefault(u => u.Id == id, "Category,ProductRating,ProductStatusMappings.ProductStatus");
+                var existingProduct = await _unitOfWork.Product.GetFirstOrDefaultAsync(u => u.Id == id, "Category,ProductRating,ProductStatusMappings.ProductStatus");
 
                 if (existingProduct == null)
                 {
@@ -71,12 +72,13 @@ namespace ehandel.Web.Areas.Admin.Controllers
                     Description = existingProduct.Description,
                     Name = existingProduct.Name,
                     Price = existingProduct.Price,
+                    ImageUrl = existingProduct.ImageUrl,
 
                     // Map nested properties
                     CategoryId = existingProduct.CategoryId,
                     ProductRatingId = existingProduct.ProductRatingId,
 
-                    CategoryList = (await _service.Category.GetAll())
+                    CategoryList = (await _unitOfWork.Category.GetAllAsync())
                         .Select(c => new SelectListItem
                         {
                             Text = c.Name,
@@ -85,7 +87,7 @@ namespace ehandel.Web.Areas.Admin.Controllers
                         })
                         .ToList(),
 
-                    RatingsList = (await _service.ProductRating.GetAll())
+                    RatingsList = (await _unitOfWork.ProductRating.GetAllAsync())
                         .Select(r => new SelectListItem
                         {
                             Text = r.Rating,
@@ -104,7 +106,7 @@ namespace ehandel.Web.Areas.Admin.Controllers
                     selectedStatuses = new List<int>();
                 }
 
-                var allStatuses = await _service.ProductStatus.GetAll();
+                var allStatuses = await _unitOfWork.ProductStatus.GetAllAsync();
 
                 productVM.StatusList = allStatuses
                     .Select(s => new SelectListItem
@@ -157,22 +159,14 @@ namespace ehandel.Web.Areas.Admin.Controllers
                 if (obj.Id == 0)
                 {
                     // Add a new product
-                    await _service.Product.Add(obj);
-                    await _service.Save();
+                    await _unitOfWork.Product.AddToDbAsync(obj);
+                    await _unitOfWork.SaveAsync();
                 }
-                #region Old code
-                //else
-                //{
-                //    // Update an existing product
-                //    await _service.Product.UpdateAsync(obj);
-                //}
-                #endregion
 
-                #region CHAT GPT FAIL
                 else
                 {
                     // Update an existing product
-                    var existingProduct = await _service.Product.GetByIdAsync(obj.Id);
+                    var existingProduct = await _unitOfWork.Product.GetByIdAsync(obj.Id);
                     if (existingProduct == null)
                     {
                         return NotFound();
@@ -196,33 +190,32 @@ namespace ehandel.Web.Areas.Admin.Controllers
                         ImageUrl = obj.ImageUrl
                     };
 
-                    await _service.Product.UpdateAsync(updateModel);
-                    await _service.Save();
+                    await _unitOfWork.Product.UpdateAsync(updateModel);
+                    await _unitOfWork.SaveAsync();
 
                     TempData["success"] = "Product updated successfully";
                     return RedirectToAction("Index");
                 }
-                #endregion
 
                 TempData["success"] = "Product created successfully";
                 return RedirectToAction("Index");
             }
 
             // Model is not valid, return to the view with validation errors
-            obj.CategoryList = (await _service.Category.GetAll()).Select(i => new SelectListItem
+            obj.CategoryList = (await _unitOfWork.Category.GetAllAsync()).Select(i => new SelectListItem
             {
                 Text = i.Name,
                 Value = i.Id.ToString()
             });
 
-            obj.RatingsList = (await _service.ProductRating.GetAll()).Select(i => new SelectListItem
+            obj.RatingsList = (await _unitOfWork.ProductRating.GetAllAsync()).Select(i => new SelectListItem
             {
                 Text = i.Rating,
                 Value = i.Id.ToString()
             });
 
             // Populate the status list
-            obj.StatusList = (await _service.ProductStatus.GetAll()).Select(s => new SelectListItem
+            obj.StatusList = (await _unitOfWork.ProductStatus.GetAllAsync()).Select(s => new SelectListItem
             {
                 Text = s.Status,
                 Value = s.Id.ToString()
@@ -238,14 +231,14 @@ namespace ehandel.Web.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var productList = await _service.Product.GetAll(includeProperties: "Category,ProductRating,ProductStatusMappings.ProductStatus");
+            var productList = await _unitOfWork.Product.GetAllAsync(includeProperties: "Category,ProductRating,ProductStatusMappings.ProductStatus");
 
             // Iterate through the product list and update the status name
             foreach (var product in productList)
             {
                 foreach (var productStatusMapping in product.ProductStatusMappings)
                 {
-                    var productStatus = await _service.ProductStatus.GetByIdAsync(productStatusMapping.ProductStatusId);
+                    var productStatus = await _unitOfWork.ProductStatus.GetByIdAsync(productStatusMapping.ProductStatusId);
                     productStatusMapping.ProductStatus.Status = productStatus.Status;
                 }
             }
@@ -257,7 +250,7 @@ namespace ehandel.Web.Areas.Admin.Controllers
         [HttpDelete]
         public async Task<IActionResult> Delete(int? id)
         {
-            var obj = await _service.Product.GetFirstOrDefault(u => u.Id == id);
+            var obj = await _unitOfWork.Product.GetFirstOrDefaultAsync(u => u.Id == id);
             if (obj == null)
             {
                 return Json(new { success = false, message = "Error while deleting" });
@@ -269,8 +262,8 @@ namespace ehandel.Web.Areas.Admin.Controllers
                 System.IO.File.Delete(oldImagePath);
             }
 
-            _service.Product.Remove(obj);
-            await _service.Save();
+            _unitOfWork.Product.Remove(obj);
+            await _unitOfWork.SaveAsync();
             return Json(new { success = true, message = "Delete successful" });
 
         }

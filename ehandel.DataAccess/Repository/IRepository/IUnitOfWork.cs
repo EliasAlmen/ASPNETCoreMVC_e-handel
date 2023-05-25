@@ -19,6 +19,6 @@ namespace ehandel.DataAccess.Repository.IRepository
         IApplicationUserCompanyRepository ApplicationUserCompany { get; }
         IApplicationUserRepository ApplicationUser { get; }
 
-        Task Save();
+        Task SaveAsync();
     }
 }

@@ -21,8 +21,9 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(x =>
         x.SignIn.RequireConfirmedAccount = false;
         x.Password.RequiredLength = 8;
         x.User.RequireUniqueEmail = false;
-    }
-).AddDefaultTokenProviders().AddEntityFrameworkStores<ApplicationDbContext>();
+    })
+    .AddDefaultTokenProviders()
+    .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IDbInitializer, DbInitializer>();

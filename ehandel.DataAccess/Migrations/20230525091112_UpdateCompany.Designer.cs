@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ehandel.DataAccess.Data;
 
@@ -11,9 +12,11 @@ using ehandel.DataAccess.Data;
 namespace ehandel.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230525091112_UpdateCompany")]
+    partial class UpdateCompany
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -262,6 +265,7 @@ namespace ehandel.DataAccess.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CompanyName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -381,7 +385,7 @@ namespace ehandel.DataAccess.Migrations
                             Email = "johndoe@example.com",
                             Name = "John Doe",
                             Phone = "123-456-7890",
-                            TimeOfContact = new DateTime(2023, 5, 25, 11, 13, 16, 912, DateTimeKind.Local).AddTicks(5365)
+                            TimeOfContact = new DateTime(2023, 5, 25, 11, 11, 12, 503, DateTimeKind.Local).AddTicks(7483)
                         },
                         new
                         {
@@ -391,7 +395,7 @@ namespace ehandel.DataAccess.Migrations
                             Email = "janesmith@example.com",
                             Name = "Jane Smith",
                             Phone = "987-654-3210",
-                            TimeOfContact = new DateTime(2023, 5, 25, 11, 13, 16, 912, DateTimeKind.Local).AddTicks(5369)
+                            TimeOfContact = new DateTime(2023, 5, 25, 11, 11, 12, 503, DateTimeKind.Local).AddTicks(7487)
                         },
                         new
                         {
@@ -401,7 +405,7 @@ namespace ehandel.DataAccess.Migrations
                             Email = "michaeljohnson@example.com",
                             Name = "Michael Johnson",
                             Phone = "555-123-4567",
-                            TimeOfContact = new DateTime(2023, 5, 25, 11, 13, 16, 912, DateTimeKind.Local).AddTicks(5372)
+                            TimeOfContact = new DateTime(2023, 5, 25, 11, 11, 12, 503, DateTimeKind.Local).AddTicks(7490)
                         },
                         new
                         {
@@ -411,7 +415,7 @@ namespace ehandel.DataAccess.Migrations
                             Email = "emilydavis@example.com",
                             Name = "Emily Davis",
                             Phone = "111-222-3333",
-                            TimeOfContact = new DateTime(2023, 5, 25, 11, 13, 16, 912, DateTimeKind.Local).AddTicks(5375)
+                            TimeOfContact = new DateTime(2023, 5, 25, 11, 11, 12, 503, DateTimeKind.Local).AddTicks(7528)
                         },
                         new
                         {
@@ -421,7 +425,7 @@ namespace ehandel.DataAccess.Migrations
                             Email = "davidbrown@example.com",
                             Name = "David Brown",
                             Phone = "444-555-6666",
-                            TimeOfContact = new DateTime(2023, 5, 25, 11, 13, 16, 912, DateTimeKind.Local).AddTicks(5379)
+                            TimeOfContact = new DateTime(2023, 5, 25, 11, 11, 12, 503, DateTimeKind.Local).AddTicks(7532)
                         });
                 });
 
@@ -475,7 +479,7 @@ namespace ehandel.DataAccess.Migrations
                         {
                             Id = 1,
                             CategoryId = 9,
-                            CreatedDateTime = "2023-05-25 11:13",
+                            CreatedDateTime = "2023-05-25 11:11",
                             Description = "The Apple Watch Series is a cutting-edge wearable device that seamlessly integrates with your iPhone, providing a range of innovative features and functionalities. With its sleek design and advanced technology, it allows you to stay connected, track your fitness, monitor your health, access apps, and receive notifications, all from your wrist.",
                             ImageUrl = "\\img\\placeholders\\270x295.svg",
                             Name = "The Apple Watch Series",
@@ -487,7 +491,7 @@ namespace ehandel.DataAccess.Migrations
                         {
                             Id = 2,
                             CategoryId = 1,
-                            CreatedDateTime = "2023-05-25 11:13",
+                            CreatedDateTime = "2023-05-25 11:11",
                             Description = "The Table Lamp is a versatile lighting fixture that adds both functionality and style to any space. With its sleek design and adjustable brightness, it provides the perfect ambiance for reading, working, or creating a cozy atmosphere. Its compact size and sturdy base make it an ideal choice for bedside tables, desks, or any tabletop surface.",
                             ImageUrl = "\\img\\placeholders\\270x295.svg",
                             Name = "Table lamp",
@@ -499,7 +503,7 @@ namespace ehandel.DataAccess.Migrations
                         {
                             Id = 3,
                             CategoryId = 8,
-                            CreatedDateTime = "2023-05-25 11:13",
+                            CreatedDateTime = "2023-05-25 11:11",
                             Description = "The ThinkPad Lenovo laptop is a powerful computing device known for its reliability and performance. Designed for professionals and business users, it offers a robust build, exceptional keyboard, and advanced security features. With its high-quality display, fast processing power, and extensive connectivity options, it empowers users to accomplish tasks efficiently and enhance productivity.",
                             ImageUrl = "\\img\\placeholders\\270x295.svg",
                             Name = "Laptop thinkpad lenovo",
@@ -511,7 +515,7 @@ namespace ehandel.DataAccess.Migrations
                         {
                             Id = 4,
                             CategoryId = 8,
-                            CreatedDateTime = "2023-05-25 11:13",
+                            CreatedDateTime = "2023-05-25 11:11",
                             Description = "Black fashion gumshoes are a trendy footwear choice that combines style and comfort. These sleek and versatile shoes feature a classic black color, making them easy to match with various outfits. With their cushioned soles and breathable materials, they provide all-day comfort for walking or casual wear. Perfect for fashion-forward individuals seeking a blend of elegance and functionality.",
                             ImageUrl = "\\img\\placeholders\\270x295.svg",
                             Name = "Gumshoes black fashion",
@@ -523,7 +527,7 @@ namespace ehandel.DataAccess.Migrations
                         {
                             Id = 5,
                             CategoryId = 4,
-                            CreatedDateTime = "2023-05-25 11:13",
+                            CreatedDateTime = "2023-05-25 11:11",
                             Description = "The woman's white dress is an elegant and timeless piece that exudes grace and sophistication. Its pristine white color symbolizes purity and femininity, while the flowing fabric drapes beautifully to enhance the wearer's silhouette. Whether worn for a special occasion or a casual outing, this dress radiates effortless style and captures the essence of femininity.",
                             ImageUrl = "\\img\\placeholders\\270x295.svg",
                             Name = "Woman white dress",
@@ -535,7 +539,7 @@ namespace ehandel.DataAccess.Migrations
                         {
                             Id = 6,
                             CategoryId = 6,
-                            CreatedDateTime = "2023-05-25 11:13",
+                            CreatedDateTime = "2023-05-25 11:11",
                             Description = "The kettle water boiler is a convenient and efficient appliance designed to quickly heat water for various purposes. With its sleek and compact design, it effortlessly fits into any kitchen space. Boasting rapid boiling capabilities, it provides hot water in a matter of minutes, making it ideal for brewing tea, coffee, or preparing instant meals. Its easy-to-use features and safety mechanisms ensure a hassle-free and enjoyable boiling experience.",
                             ImageUrl = "\\img\\placeholders\\270x295.svg",
                             Name = "Kettle water boiler",
@@ -547,7 +551,7 @@ namespace ehandel.DataAccess.Migrations
                         {
                             Id = 7,
                             CategoryId = 6,
-                            CreatedDateTime = "2023-05-25 11:13",
+                            CreatedDateTime = "2023-05-25 11:11",
                             Description = "The congee cooking rice cooker is a versatile kitchen appliance that simplifies the process of making congee, a traditional rice porridge dish. With its advanced features and settings, it ensures perfectly cooked and creamy congee every time. Whether you prefer a smooth or chunky texture, this cooker delivers consistent results, making it a convenient choice for congee lovers.",
                             ImageUrl = "\\img\\placeholders\\270x295.svg",
                             Name = "Congee rice cooker",
@@ -559,7 +563,7 @@ namespace ehandel.DataAccess.Migrations
                         {
                             Id = 8,
                             CategoryId = 6,
-                            CreatedDateTime = "2023-05-25 11:13",
+                            CreatedDateTime = "2023-05-25 11:11",
                             Description = "Pizza tomato sauce kebab is a delicious fusion dish that combines the flavors of traditional pizza with the savory taste of kebab. It features a thin crust layered with tangy tomato sauce and topped with tender kebab meat, vegetables, and melted cheese. The combination of these ingredients creates a mouthwatering and satisfying culinary experience that is sure to please pizza and kebab enthusiasts alike.",
                             ImageUrl = "\\img\\placeholders\\270x295.svg",
                             Name = "Pizza tomato sauce kebab",

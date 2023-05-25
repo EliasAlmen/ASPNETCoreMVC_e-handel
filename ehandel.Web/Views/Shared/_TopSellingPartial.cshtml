@@ -1,0 +1,28 @@
+﻿@using ehandel.Models.viewModels;
+@model HomeIndexVM
+
+<section class="bestselling">
+    <div class="container">
+        <h1>Top selling products in this week</h1>
+        <div class="cards-container">
+            @*Filtering out products. ! Excludes "Featured"*@
+            @foreach (var product in Model.AllProducts.Where(u =>
+            u.ProductStatusMappings.Any(m => m.ProductStatus.Status == "New") &&
+            u.ProductStatusMappings.Any(m => m.ProductStatus.Status == "Popular") &&
+            !u.ProductStatusMappings.Any(m => m.ProductStatus.Status == "Featured")))
+            {
+                await Html.RenderPartialAsync("_ProductCardPartial", product);
+            }
+        </div>
+        <span class="arrowbuttons">
+            <button><i class="fa-solid fa-arrow-left"></i></button><button>
+                <i class="fa-solid fa-arrow-right"></i>
+            </button>
+        </span>
+        <div class="cards-container-few">
+            <partial name="_BlogPostPartial" />
+            <partial name="_BlogPostPartial" />
+            <partial name="_BlogPostPartial" />
+        </div>
+    </div>
+</section>

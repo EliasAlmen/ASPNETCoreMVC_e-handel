@@ -1,10 +1,19 @@
 ﻿@page
+@using ehandel.Models.SD;
 @model RegisterModel
 
 <section class="container">
 
     <div class="content-form-account">
-        <p>Please Register Your new Account</p>
+        @if (User.IsInRole(SD.Role_User_Admin))
+        {
+            <h1>ADMIN AREA USER CREATE</h1>
+        }
+        else
+        {
+
+            <p>Please Register Your new Account</p>
+        }
 
         <form class="formclass" id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
 
@@ -16,7 +25,7 @@
                 <input class="form-control" asp-for="Input.FirstName" aria-required="true">
                 <span asp-validation-for="Input.FirstName" class="text-danger"></span>
             </label>
-            
+
 
             <label class="lastnameArea">
                 Last Name*
@@ -24,7 +33,7 @@
                 <input class="form-control" asp-for="Input.LastName" type="text" aria-required="true">
                 <span asp-validation-for="Input.LastName" class="text-danger"></span>
             </label>
-            
+
 
             <label class="streetnameArea">
                 Street Name*
@@ -84,10 +93,11 @@
 
             <span class="acceptArea"><input type="checkbox" name="inputSave" id="">I have read and accepts the terms and agreements</span>
 
-            @if (User.IsInRole("Admin")){
-            <select class="roleArea mb-5" asp-for="Input.Role" asp-items="@Model.Input.RoleList">
-                <option disabled selected>Select Role - For development only</option>
-            </select>
+            @if (User.IsInRole("Admin"))
+            {
+                <select class="roleArea mb-5" asp-for="Input.Role" asp-items="@Model.Input.RoleList">
+                    <option disabled selected>Select Role</option>
+                </select>
             }
             <button id="registerSubmit" class="submitArea btn-theme" type="submit">Submit</button>
         </form>

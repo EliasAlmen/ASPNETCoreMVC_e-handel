@@ -1,4 +1,11 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿const validateEmail = (event) => {
+    const regEx = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
-// Write your JavaScript code.
+
+
+    if (regEx.test(event.target.value))
+        document.querySelector(`[data-valmsg-for="${event.target.id}"]`).innerHTML = ""
+    else
+        document.querySelector(`[data-valmsg-for="${event.target.id}"]`).innerHTML = "Invalid email. example@domain.com"
+
+}
