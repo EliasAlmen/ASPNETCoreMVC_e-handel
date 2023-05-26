@@ -109,7 +109,7 @@ namespace ehandel.Web.Areas.Identity.Pages.Account
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
 
-
+            // CUSTOM
             [Required]
             public string FirstName { get; set; }
             [Required]
@@ -123,6 +123,7 @@ namespace ehandel.Web.Areas.Identity.Pages.Account
             public string City { get; set; }
             public string? CompanyName { get; set; }
             public string Role { get; set; }
+            //Admin only
             [ValidateNever]
             public IEnumerable<SelectListItem> RoleList { get; set; }
         }
@@ -150,8 +151,9 @@ namespace ehandel.Web.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
+                // New applicationUser
                 var user = CreateUser();
-
+                // Logic to remove duplicate enteries in db
                 user.ApplicationUserAddress = new ApplicationUserAddress();
                 user.ApplicationUserCompany = new ApplicationUserCompany();
 
@@ -187,6 +189,7 @@ namespace ehandel.Web.Areas.Identity.Pages.Account
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
+                // Mapping
                 user.FirstName = Input.FirstName;
                 user.LastName = Input.LastName;
                 user.PhoneNumber = Input.PhoneNumber;
@@ -194,6 +197,7 @@ namespace ehandel.Web.Areas.Identity.Pages.Account
 
                 if (result.Succeeded)
                 {
+                    // Logic for register in customer mode. Admin gets to choose. Role not visible if not admin.
                     if (Input.Role == null)
                     {
                         await _userManager.AddToRoleAsync(user, SD.Role_User_Customer);
@@ -223,11 +227,13 @@ namespace ehandel.Web.Areas.Identity.Pages.Account
                     }
                     else
                     {
+                        // If admin add, dont login new user
                         if (User.IsInRole("Admin"))
                         {
                             TempData["success"] = "New user added";
                             return Page();
                         }
+                        // login new user
                         else
                         {
                             await _signInManager.SignInAsync(user, isPersistent: false);
@@ -249,6 +255,7 @@ namespace ehandel.Web.Areas.Identity.Pages.Account
         {
             try
             {
+                // Custom ApplicationUser
                 return Activator.CreateInstance<ApplicationUser>();
             }
             catch

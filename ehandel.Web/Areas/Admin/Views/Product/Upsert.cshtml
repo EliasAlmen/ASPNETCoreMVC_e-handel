@@ -9,6 +9,7 @@
             <div class="col-10">
                 <div class="border p-3 mt-4 row">
                     <div class="col-12 p-2">
+                        @*Update or create new*@
                         <h2 class="text-primary">@(Model.Id != 0 ? "Update" : "Create") Product</h2>
                     </div>
                     <div class="mb-3">
@@ -30,7 +31,7 @@
                         <label asp-for="ImageUrl"></label>
                         <input type="file" id="uploadBox" name="file" class="form-control" />
                     </div>
-
+                    @*Update*@
                     @if (Model.Id != 0)
                     {
                         <div class="mb-3 col-6">
@@ -55,6 +56,7 @@
                         </div>
                             
                     }
+                    @*New*@
                     else
                     {
                         <div class="mb-3 col-6">
@@ -77,6 +79,7 @@
                             </select>
                         </div>
                     }
+                    @*Create or update*@
                     <div class="col-12">
                         @if (Model.Id != 0)
                         {
@@ -92,6 +95,7 @@
                     </div>
                 </div>
             </div>
+            @*Image*@
             <div class="col-2 pt-4">
                 <img src="@Model.ImageUrl" style="border-radius:5px; border:1px solid #bbb9b9" />
             </div>
@@ -104,6 +108,7 @@
         <partial name="_ValidationScriptsPartial" />
     }
     <script>
+        // Sweetalert2 https://sweetalert2.github.io/
         function ValidateInput() {
             if (document.getElementById("uploadBox").value == "") {
                 Swal.fire({
@@ -115,12 +120,10 @@
             }
             return true;
         }
-        //DESELECT
+        //Deselect statuses
         function deselectAllStatuses() {
-            // Get the select element for the selected statuses
             var selectedStatusesSelect = document.getElementById("SelectedStatuses");
 
-            // Clear all selected options
             Array.from(selectedStatusesSelect.options).forEach(option => option.selected = false);
         }
     </script>

@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace ehandel.DataAccess.Repository
 {
     /// <summary>
-    /// Repo pattern
+    /// REPOSITORY PATTERN
     /// </summary>
     /// <typeparam name="T">input class</typeparam>
     public class Repository<T> : IRepository<T> where T : class
@@ -57,6 +57,7 @@ namespace ehandel.DataAccess.Repository
 
         public async Task<T> GetByIdAsync(int id)
         {
+
             // find by Id
             return await dbSet.FindAsync(id);
         }

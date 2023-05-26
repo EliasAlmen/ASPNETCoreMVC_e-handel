@@ -146,7 +146,7 @@ namespace ehandel.DataAccess.Data
                             Name = "The Apple Watch Series",
                             Description = "The Apple Watch Series is a cutting-edge wearable device that seamlessly integrates with your iPhone, providing a range of innovative features and functionalities. With its sleek design and advanced technology, it allows you to stay connected, track your fitness, monitor your health, access apps, and receive notifications, all from your wrist.",
                             Price = 30,
-                            ImageUrl = "\\img\\placeholders\\270x295.svg",
+                            ImageUrl = "\\img\\products\\mateo-abrahan-vVmfi-yhCsc-unsplash.jpg",
                             CreatedDateTime = DateTime.Now.ToString("g"),
                             CategoryId = 9,
                             ProductRatingId = 4
@@ -158,7 +158,7 @@ namespace ehandel.DataAccess.Data
                             Name = "Table lamp",
                             Description = "The Table Lamp is a versatile lighting fixture that adds both functionality and style to any space. With its sleek design and adjustable brightness, it provides the perfect ambiance for reading, working, or creating a cozy atmosphere. Its compact size and sturdy base make it an ideal choice for bedside tables, desks, or any tabletop surface.",
                             Price = 30,
-                            ImageUrl = "\\img\\placeholders\\270x295.svg",
+                            ImageUrl = "\\img\\products\\i-m__prakhar-kont-AgU9-qsNc1Y-unsplash.jpg",
                             CreatedDateTime = DateTime.Now.ToString("g"),
                             CategoryId = 1,
                             ProductRatingId = 3
@@ -170,7 +170,7 @@ namespace ehandel.DataAccess.Data
                             Name = "Laptop thinkpad lenovo",
                             Description = "The ThinkPad Lenovo laptop is a powerful computing device known for its reliability and performance. Designed for professionals and business users, it offers a robust build, exceptional keyboard, and advanced security features. With its high-quality display, fast processing power, and extensive connectivity options, it empowers users to accomplish tasks efficiently and enhance productivity.",
                             Price = 30,
-                            ImageUrl = "\\img\\placeholders\\270x295.svg",
+                            ImageUrl = "\\img\\products\\artin-bakhan-SqLyNHbsLKQ-unsplash.jpg",
                             CreatedDateTime = DateTime.Now.ToString("g"),
                             CategoryId = 8,
                             ProductRatingId = 5
@@ -182,7 +182,7 @@ namespace ehandel.DataAccess.Data
                             Name = "Gumshoes black fashion",
                             Description = "Black fashion gumshoes are a trendy footwear choice that combines style and comfort. These sleek and versatile shoes feature a classic black color, making them easy to match with various outfits. With their cushioned soles and breathable materials, they provide all-day comfort for walking or casual wear. Perfect for fashion-forward individuals seeking a blend of elegance and functionality.",
                             Price = 80,
-                            ImageUrl = "\\img\\placeholders\\270x295.svg",
+                            ImageUrl = "\\img\\products\\omar-prestwich-mBjrF0MK6mc-unsplash.jpg",
                             CreatedDateTime = DateTime.Now.ToString("g"),
                             CategoryId = 8,
                             ProductRatingId = 5
@@ -194,7 +194,7 @@ namespace ehandel.DataAccess.Data
                             Name = "Woman white dress",
                             Description = "The woman's white dress is an elegant and timeless piece that exudes grace and sophistication. Its pristine white color symbolizes purity and femininity, while the flowing fabric drapes beautifully to enhance the wearer's silhouette. Whether worn for a special occasion or a casual outing, this dress radiates effortless style and captures the essence of femininity.",
                             Price = 30,
-                            ImageUrl = "\\img\\placeholders\\270x295.svg",
+                            ImageUrl = "\\img\\products\\allen-taylor-lLk1oJA7Wkg-unsplash.jpg",
                             CreatedDateTime = DateTime.Now.ToString("g"),
                             CategoryId = 4,
                             ProductRatingId = 5
@@ -206,7 +206,7 @@ namespace ehandel.DataAccess.Data
                             Name = "Kettle water boiler",
                             Description = "The kettle water boiler is a convenient and efficient appliance designed to quickly heat water for various purposes. With its sleek and compact design, it effortlessly fits into any kitchen space. Boasting rapid boiling capabilities, it provides hot water in a matter of minutes, making it ideal for brewing tea, coffee, or preparing instant meals. Its easy-to-use features and safety mechanisms ensure a hassle-free and enjoyable boiling experience.",
                             Price = 30,
-                            ImageUrl = "\\img\\placeholders\\270x295.svg",
+                            ImageUrl = "\\img\\products\\laura-adai-lJHhM4D0wCU-unsplash.jpg",
                             CreatedDateTime = DateTime.Now.ToString("g"),
                             CategoryId = 6,
                             ProductRatingId = 1
@@ -218,7 +218,7 @@ namespace ehandel.DataAccess.Data
                             Name = "Congee rice cooker",
                             Description = "The congee cooking rice cooker is a versatile kitchen appliance that simplifies the process of making congee, a traditional rice porridge dish. With its advanced features and settings, it ensures perfectly cooked and creamy congee every time. Whether you prefer a smooth or chunky texture, this cooker delivers consistent results, making it a convenient choice for congee lovers.",
                             Price = 30,
-                            ImageUrl = "\\img\\placeholders\\270x295.svg",
+                            ImageUrl = "\\img\\products\\katherine-chase-VNBUJ6imfGs-unsplash.jpg",
                             CreatedDateTime = DateTime.Now.ToString("g"),
                             CategoryId = 6,
                             ProductRatingId = 1
@@ -230,7 +230,7 @@ namespace ehandel.DataAccess.Data
                             Name = "Pizza tomato sauce kebab",
                             Description = "Pizza tomato sauce kebab is a delicious fusion dish that combines the flavors of traditional pizza with the savory taste of kebab. It features a thin crust layered with tangy tomato sauce and topped with tender kebab meat, vegetables, and melted cheese. The combination of these ingredients creates a mouthwatering and satisfying culinary experience that is sure to please pizza and kebab enthusiasts alike.",
                             Price = 30,
-                            ImageUrl = "\\img\\placeholders\\270x295.svg",
+                            ImageUrl = "\\img\\products\\engin-akyurt-6k5cGTWluTs-unsplash.jpg",
                             CreatedDateTime = DateTime.Now.ToString("g"),
                             CategoryId = 6,
                             ProductRatingId = 1

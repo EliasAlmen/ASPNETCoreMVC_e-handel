@@ -6,7 +6,8 @@
 @using ehandel.DataAccess.Data
 
 @{
-    var dbContext = Context.RequestServices.GetService<ApplicationDbContext>(); // Inject the ApplicationDbContext
+    // Extend IdentityUser with applicationUser 
+    var dbContext = Context.RequestServices.GetService<ApplicationDbContext>(); 
     var users = dbContext.ApplicationUsers
         .Include(u => u.ApplicationUserAddress)
         .Include(u => u.ApplicationUserCompany)
@@ -51,6 +52,9 @@
                 <th>
                     Role
                 </th>
+                <th>
+                    Action
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -92,8 +96,110 @@
                             @role
                         </td>
                     }
+                    <td>
+                        @*Admin cannot change role*@
+                        @if (user.UserName != "admin@domain.com" && user.Email != "admin@domain.com")
+                        {
+                            <button class="btn btn-primary edit-role-btn" data-userid="@user.Id" data-currentrole="@userRoles[0]">Edit Role</button>
+                        }
+                        else
+                        {
+                            <button class="btn btn-primary" disabled>Edit Role</button>
+                        }
+                    </td>
                 </tr>
             }
         </tbody>
     </table>
 </div>
+
+@*Not showing untill button pressed*@
+<div class="container w-50" id="roleChangeForm" style="display: none;">
+    <h4>Edit User Role for <span id="userName"></span></h4>
+    <select class="form-control" id="roleSelect">
+        @foreach (var role in roles)
+        {
+            <option value="@role.Name">@role.Name</option>
+        }
+    </select>
+    <button class="btn btn-primary" id="confirmRoleChangeBtn">Save</button>
+    <button class="btn btn-danger" id="cancelRoleChangeBtn">Cancel</button>
+</div>
+
+
+@*My idea was very simple in my mind, but I had so many bugs. Took help from GPT.*@
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $('.edit-role-btn').click(function () {
+                var userId = $(this).data('userid');
+                var currentRole = $(this).data('currentrole'); // Get the current role from data attribute
+                var userName = $(this).closest('tr').find('td:first').text(); // Get the user's name from the first column
+
+                // Set the user's name in the heading
+                $('#userName').text(userName);
+
+                // Find the corresponding user row and get the role value
+                var userRow = $(this).closest('tr');
+                var userRoleCell = userRow.find('td:last');
+
+                // Pre-select the current role in the dropdown
+                $('#roleSelect').val(currentRole);
+
+                // Show the role change form
+                $('#roleChangeForm').show();
+
+                // Unbind previous click event handlers
+                $('#confirmRoleChangeBtn').unbind('click');
+                $('#cancelRoleChangeBtn').unbind('click');
+
+                // Handle the role change confirmation
+                $('#confirmRoleChangeBtn').click(function () {
+                    var selectedRole = $('#roleSelect').val();
+
+                    // Send an AJAX request to update the role
+                    $.ajax({
+                        url: '/Admin/Users/ChangeRole',
+                        type: 'POST',
+                        data: { userId: userId, newRole: selectedRole },
+                        success: function () {
+                            // Update the role value in the table
+                            userRoleCell.text(selectedRole);
+
+                            // Hide the role change form
+                            hideRoleChangeForm();
+
+                            // Reload the page
+                            location.reload();
+                        },
+                        error: function () {
+                            // Handle the error if the role change fails
+                            alert('Failed to change user role. Please try again.');
+                        }
+                    });
+                });
+
+                // Handle the role change cancellation
+                $('#cancelRoleChangeBtn').click(function () {
+                    // Hide the role change form
+                    hideRoleChangeForm();
+                });
+            });
+        });
+
+        function hideRoleChangeForm() {
+            // Clear event handlers
+            $('#confirmRoleChangeBtn').unbind('click');
+            $('#cancelRoleChangeBtn').unbind('click');
+
+            // Clear selected values
+            $('#roleSelect').val('');
+
+            // Hide the role change form
+            $('#roleChangeForm').hide();
+        }
+    </script>
+}
+
+
+

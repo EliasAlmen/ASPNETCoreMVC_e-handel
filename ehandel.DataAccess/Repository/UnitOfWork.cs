@@ -11,7 +11,7 @@ namespace ehandel.DataAccess.Repository
 {
 
     /// <summary>
-    /// UNIT OF WORK
+    /// UNIT OF WORK PATTERN
     /// </summary>
     public class UnitOfWork : IUnitOfWork
     {

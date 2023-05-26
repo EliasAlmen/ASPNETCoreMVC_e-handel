@@ -58,6 +58,7 @@
                         @obj.TimeOfContact
                     </td>
                     <td width="10%">
+                        @*Adjust the time to show elapsed time*@
                         @{
                             DateTime now = DateTime.Now;
                             TimeSpan timeDifference = obj.TimeOfContact.Subtract(now);
@@ -68,7 +69,7 @@
                     </td>
                     <td>
                         <div class="w-100 btn-group" role="group">
-                            <a asp-controller="Contact" asp-action="Delete" asp-route-id="@obj.Id"
+                            <a asp-controller="ContactAdmin" asp-action="Delete" asp-route-id="@obj.Id"
                                class="btn btn-danger mx-2"><i class="bi bi-pencil-square"></i>&nbsp; Delete</a>
                         </div>
                     </td>

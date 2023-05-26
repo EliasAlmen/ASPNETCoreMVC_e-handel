@@ -31,11 +31,16 @@ namespace ehandel.Web.Areas.Admin.Controllers
         }
 
 
-        // GET
+        /// <summary>
+        /// Upsert - GET
+        /// </summary>
+        /// <param name="id">product Id</param>
+        /// <returns></returns>
         public async Task<IActionResult> Upsert(int? id)
         {
             ProductVM productVM;
 
+            // For creating a new product
             if (id == null || id == 0)
             {
                 productVM = new ProductVM
@@ -59,8 +64,9 @@ namespace ehandel.Web.Areas.Admin.Controllers
             }
             else
             {
+                // Retrives existing product
                 var existingProduct = await _unitOfWork.Product.GetFirstOrDefaultAsync(u => u.Id == id, "Category,ProductRating,ProductStatusMappings.ProductStatus");
-
+                // One more check
                 if (existingProduct == null)
                 {
                     return NotFound();
@@ -97,6 +103,7 @@ namespace ehandel.Web.Areas.Admin.Controllers
                         .ToList()
                 };
 
+                // Does product have statuses or not
                 var productStatusMappings = existingProduct.ProductStatusMappings;
                 var selectedStatuses = productStatusMappings?.Select(m => m.ProductStatusId).ToList() ?? new List<int>();
 
@@ -133,6 +140,7 @@ namespace ehandel.Web.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                // Image logic
                 string wwwRootPath = _webHostEnvironment.WebRootPath;
                 if (file != null)
                 {

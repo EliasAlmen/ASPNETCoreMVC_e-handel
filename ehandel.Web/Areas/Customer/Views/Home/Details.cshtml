@@ -1,26 +1,28 @@
-﻿@model Product
+﻿@using ehandel.Models.viewModels;
+@model DetailsVM
 <partial name="_HeroBannerPartial" />
 <main class="productdetails">
     <div class="container">
         <div class="content-textimg">
             <div class="images">
-                <img width="501" height="413" src="@Model.ImageUrl" alt="" class="div1">
-                <img width="120" height="113" src="@Model.ImageUrl" alt="" class="div2">
-                <img width="120" height="113" src="@Model.ImageUrl" alt="" class="div3">
-                <img width="120" height="113" src="@Model.ImageUrl" alt="" class="div4">
-                <img width="120" height="113" src="@Model.ImageUrl" alt="" class="div5">
+                <img width="501" height="413" src="@Model.Product.ImageUrl" alt="" class="div1">
+                <img width="120" height="113" src="@Model.Product.ImageUrl" alt="" class="div2">
+                <img width="120" height="113" src="@Model.Product.ImageUrl" alt="" class="div3">
+                <img width="120" height="113" src="@Model.Product.ImageUrl" alt="" class="div4">
+                <img width="120" height="113" src="@Model.Product.ImageUrl" alt="" class="div5">
             </div>
             <div class="textinfo">
-                <div class="productname">@Model.Name</div>
+                <div class="productname">@Model.Product.Name</div>
                 <div class="productdescription">
-                    @Model.Description
+                    @Model.Product.Description
                 </div>
                 <div class="border-mod"></div>
                 <div class="productrating">
                     @{
-                        int rating = Model.ProductRatingId;
+                        int rating = Model.Product.ProductRatingId;
                     }
-
+                    
+                    @*Add stars based on rating*@
                     @for (int i = 1; i <= 5; i++)
                     {
                         if (i <= rating)
@@ -37,9 +39,11 @@
                             break; // Exit the loop once the desired number of stars is displayed
                         }
                     }
+                    @*Never had time to do reviews on products, would be pretty simple i believe*@
                     16 reviews
                 </div>
-                <div class="productprice">$@Model.Price.ToString("0.00")</div>
+                @*Its localized so i added $*@
+                <div class="productprice">$@Model.Product.Price.ToString("0.00")</div>
                 <form class="addtocart">
                     <span>
                         <span class="btn-group">
@@ -57,12 +61,12 @@
                     <i class="fa-solid fa-circle text-danger"></i>
                     <i class="fa-solid fa-circle text-warning"></i>
                     <i class="fa-solid fa-circle text-info"></i>
-                    <span class="sku ms-5">SKU: @Model.SKU</span>
+                    <span class="sku ms-5">SKU: @Model.Product.SKU</span>
                 </div>
                 <div class="wishlist">
                     <button class="btn-white">Add to wishlist</button>
                 </div>
-                <div class="category">Category: @Model.Category.Name</div>
+                <div class="category">Category: @Model.Product.Category.Name</div>
             </div>
         </div>
         <div class="content-tabs">
@@ -107,63 +111,37 @@
                             ipsum dolor sit amet. Lorem ipsum dolor.
                         </p>
                     </div>
-                    <img width="469" height="356" src="@Model.ImageUrl" alt="hm">
+                    <img width="469" height="356" src="@Model.Product.ImageUrl" alt="hm">
                 </div>
             </div>
         </div>
         <div class="content-related">
             <h3 class="related-title">Related products</h3>
             <div class="cards-container">
-                <a class="card-modified" href="#">
-                    <img src="assets/img/placeholders/270x295.svg" alt="Product" class="img">
-                    <div class="content">
-                        <div class="text-content">
-                            <div class="name">Table Lamp</div>
-                            <div class="price">$30.00</div>
+                @*Related*@
+                @foreach (var relatedProduct in Model.RelatedProducts)
+                {
+                    <a class="card-modified" href="@Url.Action("Details", "Home", new { productId = relatedProduct.Id })">
+                        <img width="270" height="295" src="@relatedProduct.ImageUrl" alt="Product" class="img">
+                        <div class="content">
+                            <div class="text-content">
+                                <div class="name">@relatedProduct.Name</div>
+                                <div class="price">$@relatedProduct.Price.ToString("0.00")</div>
+                            </div>
+                            <i class="icon fa-regular fa-cart-plus"></i>
                         </div>
-                        <i class="icon fa-regular fa-cart-plus"></i>
-                    </div>
-                </a>
-                <a class="card-modified" href="#">
-                    <img src="assets/img/placeholders/270x295.svg" alt="Product" class="img">
-                    <div class="content">
-                        <div class="text-content">
-                            <div class="name">Table Lamp</div>
-                            <div class="price">$30.00</div>
-                        </div>
-                        <i class="icon fa-regular fa-cart-plus"></i>
-                    </div>
-                </a>
-                <a class="card-modified" href="#">
-                    <img src="assets/img/placeholders/270x295.svg" alt="Product" class="img">
-                    <div class="content">
-                        <div class="text-content">
-                            <div class="name">Table Lamp</div>
-                            <div class="price">$30.00</div>
-                        </div>
-                        <i class="icon fa-regular fa-cart-plus"></i>
-                    </div>
-                </a>
-                <a class="card-modified" href="#">
-                    <img src="assets/img/placeholders/270x295.svg" alt="Product" class="img">
-                    <div class="content">
-                        <div class="text-content">
-                            <div class="name">Table Lamp</div>
-                            <div class="price">$30.00</div>
-                        </div>
-                        <i class="icon fa-regular fa-cart-plus"></i>
-                    </div>
-                </a>
+                    </a>
+                }
             </div>
         </div>
         <div class="content-dontknow">
             <div class="dontknow">
                 <div class="img-container">
-                    <img src="assets/img/placeholders/200x122.svg" alt="">
-                    <img src="assets/img/placeholders/200x122.svg" alt="">
-                    <img src="assets/img/placeholders/200x122.svg" alt="">
-                    <img src="assets/img/placeholders/200x122.svg" alt="">
-                    <img src="assets/img/placeholders/200x122.svg" alt="">
+                    <img src="~/img/products/200x122.svg" alt="">
+                    <img src="~/img/products/200x122.svg" alt="">
+                    <img src="~/img/products/200x122.svg" alt="">
+                    <img src="~/img/products/200x122.svg" alt="">
+                    <img src="~/img/products/200x122.svg" alt="">
                 </div>
             </div>
         </div>

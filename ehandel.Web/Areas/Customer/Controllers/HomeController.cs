@@ -24,13 +24,11 @@ namespace ehandel.Web.Areas.Customer.Controllers
 
         public async Task<IActionResult> Index()
         {
-            // Check if it's the user's first visit
+            //If no cookie!
             if (IsFirstVisit())
             {
-                // Set a flag or cookie to indicate that the user has visited before
                 SetVisitedCookie();
 
-                // Render the view for the information window
                 return View("InformationWindow");
             }
 
@@ -49,6 +47,7 @@ namespace ehandel.Web.Areas.Customer.Controllers
             return View(HomeIndexVM);
         }
 
+        // Added a page for viewing the information
         public IActionResult Info()
         {
             return View("InformationWindow");
@@ -56,8 +55,18 @@ namespace ehandel.Web.Areas.Customer.Controllers
 
         public async Task<IActionResult> Details(int productId)
         {
+
             var productDetail = await _unitOfWork.Product.GetFirstOrDefaultAsync(u => u.Id == productId, includeProperties: "Category,ProductRating,ProductStatusMappings.ProductStatus");
-            return View(productDetail);
+            // Get related products
+            IEnumerable<Product> productRelated = await _unitOfWork.Product.GetAllAsync(u => u.CategoryId == productDetail.CategoryId, includeProperties: "Category,ProductRating,ProductStatusMappings.ProductStatus");
+            
+            var DetailsVM = new DetailsVM
+            {
+                RelatedProducts = productRelated,
+                Product = productDetail
+            };
+            
+            return View(DetailsVM);
         }
 
         public async Task<IActionResult> Products()
@@ -78,29 +87,22 @@ namespace ehandel.Web.Areas.Customer.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-
-        // Check if it's the user's first visit by checking for the presence of a cookie
+        // See if user already visited
         private bool IsFirstVisit()
         {
-            // Check if the "Visited" cookie exists
             var visitedCookie = Request.Cookies["Visited"];
             return string.IsNullOrEmpty(visitedCookie);
         }
 
-        // Set a cookie to indicate that the user has visited before
+        // Set visisted cookie, 10minutes
         private void SetVisitedCookie()
         {
-            // Create a "Visited" cookie with an expiration date
             var visitedCookie = new CookieOptions
             {
-                // Set the cookie expiration date to a future date
                 Expires = DateTime.Now.AddMinutes(10)
             };
 
-            // Set the value of the cookie
             Response.Cookies.Append("Visited", "true", visitedCookie);
         }
-
-
     }
 }

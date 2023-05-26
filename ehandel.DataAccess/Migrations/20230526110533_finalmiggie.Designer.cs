@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ehandel.DataAccess.Data;
 
@@ -11,9 +12,11 @@ using ehandel.DataAccess.Data;
 namespace ehandel.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230526110533_finalmiggie")]
+    partial class finalmiggie
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -381,7 +384,7 @@ namespace ehandel.DataAccess.Migrations
                             Email = "johndoe@example.com",
                             Name = "John Doe",
                             Phone = "123-456-7890",
-                            TimeOfContact = new DateTime(2023, 5, 26, 13, 16, 9, 7, DateTimeKind.Local).AddTicks(627)
+                            TimeOfContact = new DateTime(2023, 5, 26, 13, 5, 33, 260, DateTimeKind.Local).AddTicks(5935)
                         },
                         new
                         {
@@ -391,7 +394,7 @@ namespace ehandel.DataAccess.Migrations
                             Email = "janesmith@example.com",
                             Name = "Jane Smith",
                             Phone = "987-654-3210",
-                            TimeOfContact = new DateTime(2023, 5, 26, 13, 16, 9, 7, DateTimeKind.Local).AddTicks(630)
+                            TimeOfContact = new DateTime(2023, 5, 26, 13, 5, 33, 260, DateTimeKind.Local).AddTicks(5939)
                         },
                         new
                         {
@@ -401,7 +404,7 @@ namespace ehandel.DataAccess.Migrations
                             Email = "michaeljohnson@example.com",
                             Name = "Michael Johnson",
                             Phone = "555-123-4567",
-                            TimeOfContact = new DateTime(2023, 5, 26, 13, 16, 9, 7, DateTimeKind.Local).AddTicks(633)
+                            TimeOfContact = new DateTime(2023, 5, 26, 13, 5, 33, 260, DateTimeKind.Local).AddTicks(5942)
                         },
                         new
                         {
@@ -411,7 +414,7 @@ namespace ehandel.DataAccess.Migrations
                             Email = "emilydavis@example.com",
                             Name = "Emily Davis",
                             Phone = "111-222-3333",
-                            TimeOfContact = new DateTime(2023, 5, 26, 13, 16, 9, 7, DateTimeKind.Local).AddTicks(636)
+                            TimeOfContact = new DateTime(2023, 5, 26, 13, 5, 33, 260, DateTimeKind.Local).AddTicks(5945)
                         },
                         new
                         {
@@ -421,7 +424,7 @@ namespace ehandel.DataAccess.Migrations
                             Email = "davidbrown@example.com",
                             Name = "David Brown",
                             Phone = "444-555-6666",
-                            TimeOfContact = new DateTime(2023, 5, 26, 13, 16, 9, 7, DateTimeKind.Local).AddTicks(640)
+                            TimeOfContact = new DateTime(2023, 5, 26, 13, 5, 33, 260, DateTimeKind.Local).AddTicks(5948)
                         });
                 });
 
@@ -475,7 +478,7 @@ namespace ehandel.DataAccess.Migrations
                         {
                             Id = 1,
                             CategoryId = 9,
-                            CreatedDateTime = "2023-05-26 13:16",
+                            CreatedDateTime = "2023-05-26 13:05",
                             Description = "The Apple Watch Series is a cutting-edge wearable device that seamlessly integrates with your iPhone, providing a range of innovative features and functionalities. With its sleek design and advanced technology, it allows you to stay connected, track your fitness, monitor your health, access apps, and receive notifications, all from your wrist.",
                             ImageUrl = "\\img\\products\\mateo-abrahan-vVmfi-yhCsc-unsplash.jpg",
                             Name = "The Apple Watch Series",
@@ -487,9 +490,9 @@ namespace ehandel.DataAccess.Migrations
                         {
                             Id = 2,
                             CategoryId = 1,
-                            CreatedDateTime = "2023-05-26 13:16",
+                            CreatedDateTime = "2023-05-26 13:05",
                             Description = "The Table Lamp is a versatile lighting fixture that adds both functionality and style to any space. With its sleek design and adjustable brightness, it provides the perfect ambiance for reading, working, or creating a cozy atmosphere. Its compact size and sturdy base make it an ideal choice for bedside tables, desks, or any tabletop surface.",
-                            ImageUrl = "\\img\\products\\i-m__prakhar-kont-AgU9-qsNc1Y-unsplash.jpg",
+                            ImageUrl = "\\img\\placeholders\\270x295.svg",
                             Name = "Table lamp",
                             Price = 30m,
                             ProductRatingId = 3,
@@ -499,9 +502,9 @@ namespace ehandel.DataAccess.Migrations
                         {
                             Id = 3,
                             CategoryId = 8,
-                            CreatedDateTime = "2023-05-26 13:16",
+                            CreatedDateTime = "2023-05-26 13:05",
                             Description = "The ThinkPad Lenovo laptop is a powerful computing device known for its reliability and performance. Designed for professionals and business users, it offers a robust build, exceptional keyboard, and advanced security features. With its high-quality display, fast processing power, and extensive connectivity options, it empowers users to accomplish tasks efficiently and enhance productivity.",
-                            ImageUrl = "\\img\\products\\artin-bakhan-SqLyNHbsLKQ-unsplash.jpg",
+                            ImageUrl = "\\img\\placeholders\\270x295.svg",
                             Name = "Laptop thinkpad lenovo",
                             Price = 30m,
                             ProductRatingId = 5,
@@ -511,9 +514,9 @@ namespace ehandel.DataAccess.Migrations
                         {
                             Id = 4,
                             CategoryId = 8,
-                            CreatedDateTime = "2023-05-26 13:16",
+                            CreatedDateTime = "2023-05-26 13:05",
                             Description = "Black fashion gumshoes are a trendy footwear choice that combines style and comfort. These sleek and versatile shoes feature a classic black color, making them easy to match with various outfits. With their cushioned soles and breathable materials, they provide all-day comfort for walking or casual wear. Perfect for fashion-forward individuals seeking a blend of elegance and functionality.",
-                            ImageUrl = "\\img\\products\\omar-prestwich-mBjrF0MK6mc-unsplash.jpg",
+                            ImageUrl = "\\img\\placeholders\\270x295.svg",
                             Name = "Gumshoes black fashion",
                             Price = 80m,
                             ProductRatingId = 5,
@@ -523,9 +526,9 @@ namespace ehandel.DataAccess.Migrations
                         {
                             Id = 5,
                             CategoryId = 4,
-                            CreatedDateTime = "2023-05-26 13:16",
+                            CreatedDateTime = "2023-05-26 13:05",
                             Description = "The woman's white dress is an elegant and timeless piece that exudes grace and sophistication. Its pristine white color symbolizes purity and femininity, while the flowing fabric drapes beautifully to enhance the wearer's silhouette. Whether worn for a special occasion or a casual outing, this dress radiates effortless style and captures the essence of femininity.",
-                            ImageUrl = "\\img\\products\\allen-taylor-lLk1oJA7Wkg-unsplash.jpg",
+                            ImageUrl = "\\img\\placeholders\\270x295.svg",
                             Name = "Woman white dress",
                             Price = 30m,
                             ProductRatingId = 5,
@@ -535,9 +538,9 @@ namespace ehandel.DataAccess.Migrations
                         {
                             Id = 6,
                             CategoryId = 6,
-                            CreatedDateTime = "2023-05-26 13:16",
+                            CreatedDateTime = "2023-05-26 13:05",
                             Description = "The kettle water boiler is a convenient and efficient appliance designed to quickly heat water for various purposes. With its sleek and compact design, it effortlessly fits into any kitchen space. Boasting rapid boiling capabilities, it provides hot water in a matter of minutes, making it ideal for brewing tea, coffee, or preparing instant meals. Its easy-to-use features and safety mechanisms ensure a hassle-free and enjoyable boiling experience.",
-                            ImageUrl = "\\img\\products\\laura-adai-lJHhM4D0wCU-unsplash.jpg",
+                            ImageUrl = "\\img\\placeholders\\270x295.svg",
                             Name = "Kettle water boiler",
                             Price = 30m,
                             ProductRatingId = 1,
@@ -547,9 +550,9 @@ namespace ehandel.DataAccess.Migrations
                         {
                             Id = 7,
                             CategoryId = 6,
-                            CreatedDateTime = "2023-05-26 13:16",
+                            CreatedDateTime = "2023-05-26 13:05",
                             Description = "The congee cooking rice cooker is a versatile kitchen appliance that simplifies the process of making congee, a traditional rice porridge dish. With its advanced features and settings, it ensures perfectly cooked and creamy congee every time. Whether you prefer a smooth or chunky texture, this cooker delivers consistent results, making it a convenient choice for congee lovers.",
-                            ImageUrl = "\\img\\products\\katherine-chase-VNBUJ6imfGs-unsplash.jpg",
+                            ImageUrl = "\\img\\placeholders\\270x295.svg",
                             Name = "Congee rice cooker",
                             Price = 30m,
                             ProductRatingId = 1,
@@ -559,9 +562,9 @@ namespace ehandel.DataAccess.Migrations
                         {
                             Id = 8,
                             CategoryId = 6,
-                            CreatedDateTime = "2023-05-26 13:16",
+                            CreatedDateTime = "2023-05-26 13:05",
                             Description = "Pizza tomato sauce kebab is a delicious fusion dish that combines the flavors of traditional pizza with the savory taste of kebab. It features a thin crust layered with tangy tomato sauce and topped with tender kebab meat, vegetables, and melted cheese. The combination of these ingredients creates a mouthwatering and satisfying culinary experience that is sure to please pizza and kebab enthusiasts alike.",
-                            ImageUrl = "\\img\\products\\engin-akyurt-6k5cGTWluTs-unsplash.jpg",
+                            ImageUrl = "\\img\\placeholders\\270x295.svg",
                             Name = "Pizza tomato sauce kebab",
                             Price = 30m,
                             ProductRatingId = 1,

@@ -19,6 +19,7 @@
                     </div>
                     <div class="mb-3 col-6">
                         <label asp-for="Email"></label>
+                        @*Custom validation as recommended*@
                         <input asp-for="Email" rows="3" class="form-control" onkeyup="validateEmail(event)" />
                         <span asp-validation-for="Email" class="text-danger"></span>
                     </div>

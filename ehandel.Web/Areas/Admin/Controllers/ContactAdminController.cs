@@ -7,6 +7,9 @@ using System.Data;
 
 namespace ehandel.Web.Areas.Admin.Controllers
 {
+    /// <summary>
+    /// Pretty much the same as categoryController
+    /// </summary>
     [Area(SD.Role_User_Admin)]
     [Authorize(Roles = SD.Role_User_Admin)]
     public class ContactAdminController : Controller

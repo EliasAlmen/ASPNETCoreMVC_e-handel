@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ehandel.Web.Areas.Admin.Controllers
 {
+    // AUTH
     [Area(SD.Role_User_Admin)]
     [Authorize(Roles = SD.Role_User_Admin)]
     public class CategoryController : Controller
@@ -20,6 +21,7 @@ namespace ehandel.Web.Areas.Admin.Controllers
 
         public async Task<IActionResult> Index()
         {
+            // Retrive all categories and return them to the view
             IEnumerable<Category> objCategoryList = await _unitOfWork.Category.GetAllAsync();
             return View(objCategoryList);
         }
@@ -36,12 +38,12 @@ namespace ehandel.Web.Areas.Admin.Controllers
         public async Task<IActionResult> Create(Category obj)
         {
             IEnumerable<Category> objCategoryList = await _unitOfWork.Category.GetAllAsync();
-
+            //Duplicate enteries
             if (objCategoryList.Any(u => u.Name == obj.Name))
             {
                 ModelState.AddModelError("name", "Category name already exists.");
             }
-
+            // All Ok
             if (ModelState.IsValid)
             {
                 await _unitOfWork.Category.AddToDbAsync(obj);
@@ -55,11 +57,11 @@ namespace ehandel.Web.Areas.Admin.Controllers
         //GET
         public async Task<IActionResult> Edit(int? id)
         {
+            // Should never happen because the button is only displayed if the category exists.
             if (id == null || id == 0)
             {
                 return NotFound();
             }
-            //var categoryFromDb = _db.Categories.Find(id);
             var categoryFromDb = await _unitOfWork.Category.GetFirstOrDefaultAsync(u => u.Id == id);
 
             if (categoryFromDb == null)
@@ -93,7 +95,6 @@ namespace ehandel.Web.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-            //var categoryFromDb = _db.Categories.Find(id);
             var categoryFromDb = await _unitOfWork.Category.GetFirstOrDefaultAsync(u => u.Id == id);
 
             if (categoryFromDb == null)

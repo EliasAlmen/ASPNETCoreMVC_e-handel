@@ -9,7 +9,7 @@ namespace ehandel.Models
 {
     public class EmailSender : IEmailSender
     {
-
+        // placeholder
         public Task SendEmailAsync(string email, string subject, string htmlMessage)
         {
             return Task.CompletedTask;

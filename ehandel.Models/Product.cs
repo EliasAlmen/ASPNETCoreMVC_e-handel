@@ -11,6 +11,9 @@ using System.Xml.Linq;
 
 namespace ehandel.Models
 {
+	/// <summary>
+	/// Product class can have one rating and category. It may have several statuses.
+	/// </summary>
 	public class Product
 	{
 		public int Id { get; set; }

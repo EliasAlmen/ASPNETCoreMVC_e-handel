@@ -60,7 +60,7 @@ namespace ehandel.Web.Areas.Identity.Pages.Account.Manage
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
-
+            // Custom
             [Display(Name = "First name")]
             public string FirstName { get; set; }
 
@@ -164,6 +164,7 @@ namespace ehandel.Web.Areas.Identity.Pages.Account.Manage
                 // Create a new address if it doesn't exist
                 applicationUser.ApplicationUserCompany = new ApplicationUserCompany();
             }
+            // Mapping
             applicationUser.ApplicationUserAddress.StreetName = Input.StreetAddress;
             applicationUser.ApplicationUserAddress.City = Input.City;
             applicationUser.ApplicationUserAddress.PostalCode = Input.PostalCode;
